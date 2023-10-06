@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>이미지 삽입하기</title>
+</head>
+<body>
+  <h1>바빠 시리즈</h1>
+  <h1>바빠 시리즈</h1>
+  <p>바빠 시리즈</p>
+  <p>바빠 시리즈</p>
+  <span>AA</span><span>BB</span><span>CC</span>
+  <!-- display: block요소 (한 줄 전체 차지), inline요소 : img, span -->
+  <!-- 절대경로 : /로 시작 http://localhost:9090, 직접 경로 작성시 변경 가능한 값이 있다면 좋지 않음 -->
+  <!-- 상대경로 : 현재기준, html파일의 경로가 바뀌면 좋은 방법 아님 -->
+  <img src="images/cover.jpg" alt="빠른연산">
+  <img src="./images/cover.jpg" alt="빠른연산">
+  <img src="/aawebProject/03/images/cover.jpg" alt="빠른연산">
+  <img src="http://localhost:9090/aawebProject/03/images/cover.jpg" alt="빠른연산">
+</body>
+</html>

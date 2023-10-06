@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	table {
+		border-collapse: collapse;
+		line-height: 1.2em;
+	}
+	table caption {
+		text-align: left;
+		padding-left: 10px;
+		font-weight: 700;
+	}
+	
+	table th, td {
+		padding: 5px 0;
+	}
+	table th {
+		width: 100px;
+		background-color: #eee;
+	}
+	table td {
+		width: 250px;
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<h1>첫번째 퀴즈</h1>
+	<table border="1">
+		<caption>수습 국원 지원 양식</caption>
+		<thead>
+			<tr>
+				<td colspan="3">###### thead ######</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th rowspan="3">개인정보</th>
+				<th>이름</th>
+				<td>유은경</td>
+			</tr>
+			<tr>
+				<th>학과/학번</th>
+				<td>신한DS</td>
+			</tr>	
+			<tr>
+				<th>연락처</th>
+				<td>010-4575-0211</td>
+			</tr>
+			<tr>
+				<th>지원분야</th>
+				<td colspan="2">풀스택</td>
+			</tr>	
+		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="3">###### tfoot ######</td>
+			</tr>
+		</tfoot>		
+	</table>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Input 연습</title>
+</head>
+<inputbody>
+	<h1>사용자의 입력을 서버로 전송하는 연습</h1>
+	<form name="myFrm" action="3.jsp" method="get">
+		1.생략: <input name="my1" value="aa" maxlength="5" readonly autofocus><br>
+		2.text: <input name="my2" type="text" value="bb"><br>
+		3.password: <input name="my3" type="password" value="cc"><br>
+		4.hidden: <input name="my4" type="hidden" value="마포구"><br>
+		5.search: <input name="my5" type="search" placeholder="검색할 문자 입력"><br>
+		6.email: <input name="my6" type="email" placeholder="zz@aa.bb" required><br>
+		7.url: <input name="my7" type="url"><br>
+		8.tel: <input name="my8" type="tel" pattern="[01]{3}-[0-9]{4}-[0-9]{4}"><br>
+		<fieldset>
+			<legend>숫자입력</legend>
+			9.number: <input name="my9" type="number" min="1" max="10"><br>
+			10.range: <input name="my10" type="range" min="1" max="10"><br>
+		</fieldset>
+		11.radio:
+		<fieldset>
+			<legend>신청 과목</legend>
+			<p>이 달에 신청할 과목을 선택하세요 (1과목만 가능 radio는 서로 배타적)</p>
+			<label><input type="radio" name="subject" value="speaking" checked>회화</label>
+			<label><input type="radio" name="subject" value="grammar">문법</label>
+			<label><input type="radio" name="subject" value="writing">작문</label>
+		</fieldset>
+		11.성별 선택(radio):
+		<div style="margin:10px 0;">
+			<label><input type="radio" name="gender" value="male" checked>남자</label>
+			<label><input type="radio" name="gender" value="female">여자</label>
+		</div>
+		12.checkbox:
+		<fieldset>
+			<legend>메일링</legend>
+			<p>메일로 받고 싶은 뉴스 주제를 선택해 주세요 (복수 선택 가능, checkbox는 독립적)</p>
+			<label><input type="checkbox" name="mailing" value="news" checked>해외 단신</label>
+			<label><input type="checkbox" name="mailing" value="dialog">5분 회화 </label>
+			<label><input type="checkbox" name="mailing" value="pops">모닝팝스</label>
+		</fieldset>
+		13.일자 관련 tag들:
+		<fieldset>
+			<legend>일자 관련 tag들</legend>
+			<input type="date" name="my11"><br>
+			<input type="time" name="my12"><br>
+			<input type="datetime-local" name="my13"><br>
+			<input type="week" name="my14"><br>
+			<input type="month" name="my15"><br>
+		</fieldset>
+		14.select 부서선택 dept:
+		<fieldset>
+			<legend>부서선택</legend>
+			<select name="dept">
+				<option value="aa">개발부1</option>
+				<option selected>개발부2</option>
+				<option>개발부3</option>
+				<option>개발부4</option>
+				<option>개발부5</option>
+			</select>
+		</fieldset>
+		15.select 부서선택 dept2:
+		<fieldset>
+			<legend>부서선택(여러개)</legend>
+			<select name="dept2" multiple>
+				<option value="aa">개발부1</option>
+				<option selected>개발부2</option>
+				<option>개발부3</option>
+				<option>개발부4</option>
+				<option>개발부5</option>
+			</select>
+		</fieldset>
+		<div>
+			16.select optgroup:
+			<select id="class" name="class">
+				<optgroup label="공과대학">
+					<option value="archi">건축공학과</option>
+					<option value="mechanic">기계공학과</option>
+					<option value="indust">산업공학과</option>
+					<option value="elec">전기전자공학과</option>
+					<option value="computer">컴퓨터공학과</option>
+					<option value="chemical">화학공학과</option>
+				</optgroup>
+				<optgroup label="인문대학">
+					<option value="history">사학과</option>
+					<option value="lang">어문학부</option>
+					<option value="philo">철학</option>
+				</optgroup>
+			</select>
+		</div>
+		<div>
+			17.select datalist:
+			<!-- datalist : 선택, 입력 모두 가능 -->
+			<input type="text" name="interest" list="choices">
+			<input type="text" name="interest2" list="choices">
+			<datalist id="choices">
+				<option value="grammar" label="문법"></option>
+				<option value="voca" label="어휘"></option>
+				<option value="speaking" label="회화"></option>
+				<option value="listening" label="리스닝"></option>
+				<option value="news" label="뉴스청취"></option>
+			</datalist>
+		</div>
+		<div style="display: flex; align-items: flex-start;">
+			18.textarea:
+			<textarea name="text" rows="5" cols="80"></textarea>
+		</div>
+		<input style="margin-top: 15px;" type="submit" value="서버 전송">
+		<input type="submit" value="서버 전송">
+		<input type="reset" value="초기화">
+		<input type="button" value="button" onclick="alert('button타입은 자바스크립트로 처리한다.');myFrm.submit();">
+		<!-- image 타입은 submit 한다. -->
+		<input type="image" src="../html5-css3-master/04/images/login.jpg">
+		<button>input타입이 아닌 button 태크이용(form안에 있으면 submit)</button>
+	</form>
+	19.output: 
+	<form oninput="result.value=parseInt(num1.value)+parseInt(num2.value)">
+		<input type="number" name="num1" value="0">
+		+<input type="number" name="num2" value="0">
+		=<output name="result" for="num"></output>
+	</form>
+	<button onclick="call2()">input타입이 아닌 button 태크이용</button>
+	<input type="submit" value="서버 전송(form밖)">
+	<input type="button" value="서버 전송(form밖)">
+	<hr>
+	<hr>
+	<form>
+		<input type="submit" value="서버전송2">
+	</form>
+	<script>
+		function call2() {
+			alert("자바스크립트 함수입니다.");
+			myFrm.submit();
+		}
+	</script>
+	</body>
+
+</html>

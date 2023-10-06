@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	/* inline : contents만큼만 자리차지, width 속성 불가 */
+	/* block : width 가능 */
+	label {
+		display: inline-block;		
+		width: 150px;
+		border: 1px solid grey;
+	}
+	h1 {
+		border: 1px solid grey;
+		width: 400px;
+	}
+</style>
+</head>
+<body>
+	<h1>로그인하기(get방식)</h1>
+	<!-- get방식: method="get", 
+		1)form태그에 method="get"작성하거나 생략 
+		2)<a>태그
+		3)주소창에 작성 후 enter -->
+	<!-- 주소창에 전달값이 보임(보안안됨), 자리수 제한 있음, URL 자동 인코딩, 주로 조회목적일때 사용 -->
+	<!-- form : input을 묶어서 서버로 보내기가 목적 action:서버프로그램 -->
+	<!-- input type="submit" 서버전송 -->
+	
+	<form action="5.jsp" method="get">
+		<label>사용자ID</label> : <input name="userid"><br>
+		<label>사용자PASS</label> : <input name="userpass"><br>
+		<input type="submit" value="Login">
+	</form>
+	<a href="5.jsp?userid=admin&userpass=1234">get방식으로 서버에 요청보내기</a>
+	
+	<hr>
+	
+	<!-- post방식: post라고 작성한느 방법만 있음, 
+		주소창에 값이 보이지 않고 요청 문서의 body에 보낸다. 보안됨. 자리수 제한 없음. -->	
+	<form action="5.jsp" method="post">
+		<input name="userid">
+		<input name="userpass">
+		<input type="submit" value="Login">
+	</form>
+</body>
+</html>
