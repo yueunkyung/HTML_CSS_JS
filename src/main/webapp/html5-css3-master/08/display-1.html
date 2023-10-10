@@ -12,13 +12,30 @@
 			#inline img {
 				margin:10px;
 			}
-			#block img {
+			#block img, .my1 img {
 				display:block;
 				margin:10px;
+			}
+			p {
+				border: 1px solid green;
+			}
+			div p {
+				display: inline;
 			}
 		</style>
 	</head>
 	<body>
+		<div>
+			<p>AA1</p>
+			<p>AA2</p>
+			<p>AA3</p>
+			<p>AA4</p>
+		</div>
+		<div class="my1">
+			<img src="images/pic1.jpg">
+			<img src="images/pic2.jpg">
+			<img src="images/pic3.jpg">			
+		</div>
 		<div id="inline">
 			<img src="images/pic1.jpg">
 			<img src="images/pic2.jpg">

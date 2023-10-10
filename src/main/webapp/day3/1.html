@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta content="width=device-width,minimum-scale=1.0" name="viewport" />
+	<link href="external.css" rel="stylesheet" type="text/css" />
+	<title>Insert title here</title>
+	<style>
+		/* inline, internal, external
+		*/
+		* {
+			margin: 0;
+			/* margin -> 요소들 사이의 간격 */
+			padding: 0;
+		}
+
+		h1 {
+			border: 5px solid green;
+		}
+
+		p {
+			/* h1, p 요소 : block 요소 */
+			border: 1px solid gray;
+			padding: 5px;
+			/* border와 contents 사이의 간격 */
+		}
+
+		#my1 {
+			/* 문서 내에서 유일한 tag 스타일 지정 시 사용 */
+			background-color: yellowgreen;
+		}
+
+		.my2 {
+			/* class 선택자는 tag 이름 다른 경우, 같은 스타일 지정하고자 할때 사용 */
+			background-color: hotpink;
+		}
+
+		p.my2 {
+			/* 복합선택자 */
+			color: blue;
+		}
+		#container {
+			width: 400px;
+			height: 200px;
+			margin: 0 auto;	/* 요소 중간 정렬 */
+		}
+		h3, h4 {
+			/* group 선택자(or) */
+			font-size: 40px;
+		}
+		.my3 {
+			background-color: aqua;
+		}
+		.my4 {
+			color: blueviolet;
+		}
+		/*충돌발생 
+			1. 똑같다면 나중 것이 적용
+			2. !important 가 있다면 우선한다.
+		*/
+		h4 { color: red !important;}
+		h4 { color: green; }
+		
+		/* 우선순위
+			id선택자 > class선택자 > tag선택자
+		 */
+		.my5class { background-color: darkgoldenrod; }
+		#my5 { background-color: rgb(218, 158, 250); }
+		h5 { background-color: aqua; }
+		h5.my5 { background-color: yellow; }
+	</style>
+</head>
+
+<body>
+	<div id="container">
+		<h1 style="color: red;">CSS시작하기</h1>
+		<h2 class="my2">CSS시작~~~~</h2>
+		<h3 class="my3 my4">h3....</h3>
+		<h4 style="color: black;">h4....</h4>
+		<h5 id="my5" class="my5class">h5~~~~~~</h5>
+		<p id="my1">HTML5</p>
+		<p class="my2">CSS3</p>
+		<p>JavaScript</p>
+		<p>JQuery</p>
+		<p>ReactJS</p>
+	</div>
+</body>
+
+</html>

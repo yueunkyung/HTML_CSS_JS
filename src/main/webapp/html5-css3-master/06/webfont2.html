@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-
 <html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <title>웹 폰트 사용하기</title>
-    <style>
-      @import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap'); /* 구글 웹 폰트 */
-      .ng-font {
-        font-family:'Nanum Gothic', 돋움;  /* 웹 폰트 지정 */
-      }
-      p {
-        font-size:30px; /* 글자 크기 */
-      }
-    </style>
+	<meta charset="utf-8">
+	<title>웹 폰트 사용하기</title>
+	<style>
+		/* 구글 웹 폰트 */
+		@import url(//fonts.googleapis.com/earlyaccess/jejugothic.css);
+		@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap');
+		
+		/* 사이트가 폰트를 가지고 있는 경우 */
+		@font-face {
+			font-family: 'trana';
+			/* 글꼴 */
+			src: local('trana'),
+				url('trana.eot'),
+				url('trana.woff') format('woff'),
+				url('trana.ttf') format('truetype');
+		}
+		.ng-font { font-family: 'Nanum Gothic', 돋움; /* 웹 폰트 지정 */ }
+		p { font-size: 30px; /* 글자 크기 */ }
+		p.ng-font2 { font-family: 'Jeju Gothic', sans-serif; }
+		p.ng-font3 { font-family: 'trana', sans-serif; }
+		html {
+			font-size: 10px;
+		}
+		#container { font-size: 20px; }
+		h1 { 
+			/* 
+				PX: 고정크기
+				em: 부모의 크기에 영향
+				rem(root em): root에 영향			
+			*/
+			font-size: 2rem; 
+		}
+	</style>
 </head>
 <body>
-  <p>브라우저 기본 글꼴 사용</p>
-  <p class="ng-font">나눔고딕 웹 폰트 사용</p>
+	<div id="container">		
+		<h1>font size 연습</h1>
+	</div>
+	<p>브라우저 기본 글꼴 사용</p>
+	<p class="ng-font">나눔고딕 웹 폰트 사용</p>
+	<p class="ng-font2">제주고딕 웹 폰트 사용</p>
+	<p class="ng-font3">trana 폰트 사용</p>
 </body>
+
 </html>

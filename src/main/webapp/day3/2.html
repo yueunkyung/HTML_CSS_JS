@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	body {
+		/* 부모의 속성이 자식에 흐른다 */
+		font-family: "돋움";
+		color: darkgreen;
+	}
+	h1, ul, li { border: 1px solid gray; }
+	.box{
+		width:100px;
+		height:60px;
+		background:#fff;
+		border:2px solid green;
+		text-align:center;
+		line-height:60px;
+	}
+	.box:hover {
+		/*-webkit-transform: rotate(15deg);
+		-moz-transform: rotate(15deg);
+		-o-transform: rotate(15deg);
+		-ms-transform: rotate(15deg);
+		*/
+		transform: rotate(15deg);
+	}
+</style>
+</head>
+<body>
+<h1>뉴욕 타임즈에서 발표한 세계 10대 슈퍼푸드</h1>
+<ul>
+	<li>블루베리</li>
+	<li>귀리</li>
+	<li>토마토</li>
+	<li>시금치</li>
+	<li>적포도주</li>
+	<li>견과류</li>
+	<li>브로콜리</li>
+	<li>연어</li>
+	<li>마늘</li>
+	<li>녹차</li>
+</ul>
+<div class="box">Mouse Over</div>
+</body>
+</html>
