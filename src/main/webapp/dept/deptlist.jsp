@@ -15,7 +15,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body style="margin: 50px 0 100px;">
 	<h1>부서 목록</h1>
 	<table border="1">
 		<tr>

@@ -17,6 +17,25 @@ public class EmpDAO {
 	PreparedStatement pst;
 	ResultSet rs;
 
+	public EmpVO selectById(int empid) {
+		EmpVO emp = null;
+		String sql = "select * from employees where employee_id = ?";
+		conn = DBUtil.getConnection();
+		try {
+			pst = conn.prepareStatement(sql);
+			pst.setInt(1, empid);
+			rs = pst.executeQuery();
+			while(rs.next()) {
+				emp = makeEmp(rs);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.dbDisConnection(conn, st, rs);
+		}
+		return emp;
+	}
+	
 	public List<EmpVO> selectAll() {
 		List<EmpVO> emplist = new ArrayList<>();
 		String sql = "select * from employees";

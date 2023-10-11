@@ -13,7 +13,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>직원 목록</title>
 <style>
 	#container {
 		width: 90%;
@@ -22,6 +23,7 @@
 	h1 { text-align: center; }
 	table {
 		border-collapse: collapse;
+		margin: 0 auto;
     }
     table th, table td {
     	border: 1px solid #bbb;
@@ -37,7 +39,6 @@
     table td {
     	padding: 7px 10px;
     	text-align: center;
-    	background-color: #fff;
     }
     table tbody tr:hover td {
     	background-color: #ffffd7;
@@ -45,14 +46,54 @@
     table tbody tr td:hover {
     	background-color: #ffff9b;
     }
+    
+    /* 직원 이름이 'D'로 시작하면 글씨색을 red */
+    /* 한칸 이상의 공백은 자손을 의미한다 */
+    table tbody tr td[fname ^="D"] {
+    	color: red;
+    }
+    
+    /* tr의 seq 속성에 값이 5로 끝나면 스타일 바꾸기 */
+    table tbody tr[seq $="5"] {
+    	background-color: #eaeaea;
+    }
+    
+    /* data 중에 짝수번째 row에 border 스타일 변경 */
+    table tbody tr:nth-of-type(even) {
+    	border: 2px dotted green;
+    }
+    
+    /* data 중에 짝수번째 row에 border 스타일 변경 */
+    table tbody tr:nth-of-type(2n+1) {
+    	border: 2px dotted hotpink;
+    }
+    table tbody tr:First-child,
+    table tbody tr:last-child {
+    	background-color: aqua;
+    }
+    p:only-child {
+    	font-size: 30px;
+    }
+    p:only-of-type {
+    	font-size: 50px;
+    	color: maroon;
+    }
+    #container h1::before, #container h1::after {
+    	content:"**********";
+    }
 </style>
 </head>
 <body>
+	<div>
+		<h1>p가 1개인 경우</h1>
+		<p>Only Child</p>
+	</div>
 	<div id="container">
 		<h1>직원목록</h1>
 		<table>
 			<thead>
 				<tr>
+					<th>순서</th>
 					<th>employee_id</th>
 					<th>first_name</th>
 					<th>last_name</th>
@@ -67,10 +108,19 @@
 				</tr>
 			</thead>
 			<tbody>
-				<%for(EmpVO emp:emplist) { %>
-					<tr>		
-						<td><%= emp.getEmployee_id() %></td>
-						<td><%= emp.getFirst_name() %></td>
+				<%
+				int i=0;
+				for(EmpVO emp:emplist) { 
+					i++;
+				%>				
+					<tr seq="<%= i %>">
+						<td><%= i %></td>
+						<td>
+							<a href="empDetail.jsp?empid=<%= emp.getEmployee_id() %>">
+								<%= emp.getEmployee_id() %>
+							</a>
+						</td>
+						<td fname="<%= emp.getFirst_name() %>"><%= emp.getFirst_name() %></td>
 						<td><%= emp.getLast_name() %></td>
 						<td><%= emp.getEmail() %></td>
 						<td><%= emp.getPhone_number() %></td>

@@ -6,17 +6,38 @@
 <style>
 	#container ul {
 		border: 1px dotted blue; /* #container 요소의 모든 하위 ul 요소에 파란 1px 실선 */
+	}	
+	#container > ul {
+		list-style: none;
+	}
+	ul.aa { list-style: square;}
+	h1 + p {
+		/* 바로 다음 형제 */
+		background-color: green;
+	}
+	h1~p{
+		font-size: 20px;
+		color: brown;
+	}
+	h2~p {
+		color: blue;
 	}
 </style>
 </head>
 
 <body>
   <section id="container">
-  <header><h1>예약 방법 및 요금</h1></header>
-  <p> 요안도라에 예약하려면?
+  <header>
+	  <h1>예약 방법 및 요금</h1>
+	  <p>h1 다음에 나오는 p</p>
+	  <p>h1 다음 다음에 나오는 p</p>
+	  <h2>h1의 형제 h2</h2>
+	  <p>h1의 형제 p</p>
+	  <p> 요안도라에 예약하려면?</p>  
+  </header>
   <ul>
     <li> 예약 방법
-      <ul>
+      <ul class="aa">
         <li>직접 통화</li>
         <li>문자 남기기</li>                       
      </ul>

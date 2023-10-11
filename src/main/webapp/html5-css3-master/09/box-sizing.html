@@ -5,7 +5,12 @@
   <meta charset="utf-8">
   <title>box-sizing</title>
 	<style>
-		div {
+		.box_wrap::after {
+			content: '';
+			display: block;
+			clear: both;
+		}
+		.box {
 			float:left;
 			margin-right:20px;
 		}
@@ -16,6 +21,7 @@
 			margin: 10px; /* 마진 */
 			padding: 30px; /* 패딩 */
 			border:2px solid red; /* 테두리 */
+			background-color: #eaf7cf;
 		}
 		.box2 {
 			box-sizing:border-box;  /* 테두리까지(박스 전체) 기준*/
@@ -24,11 +30,14 @@
 			margin: 10px; /* 마진 */
 			padding: 30px; /* 패딩 */
 			border: 2px solid red; /* 테두리 */
+			background-color: #f5deff;
 		}
 	</style>
 </head>
 <body>
-	<div class="box1"> box-sizing = "content-box" </div>
-	<div class="box2"> box-sizing = "border-box"</div>
+	<div class="box_wrap">
+		<div class="box box1"> 1.box-sizing = "content-box" </div>
+		<div class="box box2"> 2.box-sizing = "border-box"</div>		
+	</div>
 </body>
 </html>

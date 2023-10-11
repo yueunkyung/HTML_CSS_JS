@@ -2,12 +2,39 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>신한 웹 프로젝트</title>
+<style>
+	ul {
+		list-style: none;
+	}
+	ul::after {
+		content: '';
+		display: block;
+		clear: both;
+	}
+	ul li {
+		float: left;
+		border: 1px solid green;
+		background-color: darkblue;
+	}
+	ul li a {
+		display: block;	/* li와 a가 합쳐지도록 조절 */
+		color: white;
+		padding: 10px;
+		text-decoration: none;
+		border: 1px solid red;
+	}
+</style>
 </head>
 <body>
 	<h1>우리집에 오신것을 환영합니다.(유은경)</h1>
 	<p>내장entity:& &amp; &lt; < </p>
 	<a href="03/link.html" target="_self">링크연습1</a>
 	<a href="/aawebProject/03/link.html" target="_blank">링크연습2</a>
+	<ul>
+		<li><a href="emp/empList.jsp">직원조회</a></li>
+		<li><a href="emp/empInsert_real.jsp">직원입력</a></li>
+		<li><a href="dept/deptlist.jsp">부서조회</a></li>
+	</ul>
 </body>
 </html>
