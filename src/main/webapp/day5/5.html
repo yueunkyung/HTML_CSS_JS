@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>변수의 범위</h1>
+	<button id="btn1">범위1</button>
+	<button id="btn2">범위2</button>
+	<button id="btn3">백틱</button>
+	<hr>
+	<div id="here1">여기1</div>
+	<div id="here2">여기2</div>	
+	<script>		
+		document.querySelector("#btn3").onclick = function(){
+			var s1 = "문자";
+			var s2 = '<ul>'
+					 + '<li>A</li>'
+					 + '<li>B</li>'
+					 + '</ul>';
+			var s3 = `
+				<ul>
+					<li>A</li>
+					<li>B</li>
+					<li>C</li>
+				</ul>`;
+				
+			document.querySelector("#here1").innerHTML = s3; 
+		};
+		
+	</script>	
+	<script>
+		//*, tag, #, ., []
+		var a = 100;
+		document.querySelector("#btn1").onclick = function(){
+			console.log("btn1 누름");
+			
+			d=400; //선언과 값 할당이 동시, 무조건 global
+			const c = 300;	//상수는 값을 변경 불가
+			var b = 200;
+			a++;b++;c++;
+			//c++, h.html:21 5.html:21 Uncaught TypeError: Assignment to constant variable.
+			document.querySelector("#here1").innerHTML = a + b;
+			
+			//변수 선언 시 var 있는지?
+			//있다면 지역(function 내에서 유효, function 밖이면 global) 변수
+			//let은 {}내에서만 유효
+			for(let i = 1; i<=10; i++){
+				
+			};
+			document.querySelector("#here2").innerHTML = a + b + c;
+		};
+		document.querySelector("#btn2").onclick = function(){
+			console.log("btn2 누름");
+			var b = "(숫자+문자)버튼 2를 누름";
+			document.querySelector("#here1").innerHTML = a + b + i;
+		};
+	</script>
+</body>
+</html>

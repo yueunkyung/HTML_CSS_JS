@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	//var은 function 안으로 들어가면 지역, 밖이면 전역
+	var v1;
+	console.log(v1 +"==>"+ typeof(v1));
+	
+</script>
+</head>
+<body>
+	<h1 onclick="f1();">JavaScript 잘하기</h1>
+	<button id="btn1">JS datatype</button>
+	<button id="btn2">header 문자 변경</button>
+	<hr>
+	<div id="here">여기</div>
+	<div id="here2" style="background-color: #fff2f4;">여기</div>
+	<script>
+		var a = 100;
+		var b = 200;
+			
+		// 선언적 함수 : 함수는 문장들의 묶음, 이름이 있는 함수
+		function f1(){
+			var c = 300;	// 지역변수
+			d = 400;	// f1 함수가 실행되면 global 변수가 된다.
+		}
+		f1();
+		document.querySelector("#here2").innerHTML = a + b + d;
+	</script>
+	<script>		
+		obj = document.querySelector("#btn2");
+		var h = document.querySelector("h1");
+		obj.onclick = function(){
+			h.innerHTML = "자바스크립트 <mark>아자아자!!</mark>";
+		};
+	</script>
+	<script>
+		obj = document.querySelector("#btn1");
+		var here = document.querySelector("#here");
+		obj.onclick = function(){
+			here.innerHTML = obj.innerHTML;	
+		};
+	</script>	
+	<script>
+			var hh = document.getElementById("here");	
+			
+			hh.innerHTML += "<br>=====  v1  ==============================";
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = 100;
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = "자바스크립트 연습"
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = 10<20;
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = {};
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = function(){};
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			//v2 is not defined..........오류이다
+			//v3은 선언했지만 값을 할당하지 않음....오류 아님
+			var v3;
+			// hh.innerHTML += "<br>"+ v2 + "==>" + typeof(v2)+"<br>"; //error
+			hh.innerHTML += "<br>"+ v3 + "==>" + typeof(v3)+"<br>";
+	</script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h2 { color: blue; }
+	button { cursor: pointer; }
+</style>
+</head>
+<body>
+	<h1>변수의 범위</h1>
+	<button id="btn1">범위1</button>
+	<button id="btn2">범위2</button>
+	<hr>
+	<div id="here">여기</div>
+	<div id="here2">여기2</div>
+	<script>
+		//onclick : 이벤트, 사건 발생
+		//listener : 사건 발생 시 수행하는 행위, 함수로 작성한다.
+		document.querySelector("#btn1").onclick = function(){
+			document.querySelector("#here2").innerHTML = "익명함수";
+		};
+		
+		document.querySelector("#btn2").onclick = call;
+		
+		function call(){
+			document.querySelector("#here2").innerHTML = "선언적 함수";
+		}
+		
+	</script>
+	<script>
+		//호이스팅 : 실행시 var, function을 맨위로 올린다.
+		alert(v1);	//undifined
+		
+		var v1 = 100;
+		f1();
+		
+		function f1() {
+			//NaN(Not a Number: 숫자가 아니므로 더할 수 없음)
+			alert("함수입니다." + (v1 + v2));
+			var v2 = 200;
+			alert("함수입니다two" + (v1 + v2));
+		}
+	</script>
+	<script>
+		document.querySelector("#here").innerHTML = "<strong>변수</strong>의 <mark>범위</mark>를 알아보자";
+	</script>
+</body>
+</html>

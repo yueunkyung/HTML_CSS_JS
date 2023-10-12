@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1 style="background-color: green;" onclick="alert('inline.js')">JavaScript type</h1>
+	<button id="btn1">JS type1?</button>
+	<button id="btn2">JS type2?</button>
+	<button id="btn3">JS type3?</button>
+	<div id="here">여기</div>
+	<script>
+		//일반적으로 가장 많이 사용한다.(external)
+		//위치: 시간이 적게 소요(head)
+		//	   시간이 많이 소요(body닫기전)
+		//1.internal js
+		//2.external js
+		//3.inline js....권장안함
+		var a = document.getElementById("btn1");
+		var b = document.getElementById("btn2");
+		a.onclick = f1;
+		b.onclick = f2;
+		
+		document.getElementById("here").innerHTML = "!!!자바스크립트!!!";
+		
+		function f2(){
+			// alert("f1 function");
+			//document.getElementById("here").innerHTML = "자바스크립트";
+			
+			var hh = document.getElementById("here");
+			
+			var v1 = 100;
+			hh.innerHTML += "<br>=====  v1  ==============================";
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = "자바스크립트 연습"
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = 10<20;
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = {};
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			v1 = function(){};
+			hh.innerHTML += "<br>"+ v1 + "==>" + typeof(v1)+"<br>";
+			//v2 is not defined..........오류이다
+			//v3은 선언했지만 값을 할당하지 않음....오류 아님
+			var v3;
+			hh.innerHTML += "<br>"+ v3 + "==>" + typeof(v3)+"<br>";
+			hh.innerHTML += "<br>"+ v2 + "==>" + typeof(v2)+"<br>";
+		}
+		function f1(){
+			// alert("f1 function");
+					
+			// JavaScript는 동적 타입핑이다.(동적으로 타입이 정해진다.)
+			// 타입 선언이 불필요
+			// 변수 선언시 var 있으면 지역변수
+			// var 없으면 전역변수
+			// JS type : undefined, boolean, number, string, object, function
+			var score1, score3, score4=[1,2,3,4,5], score5={name:"홍길동", age:20};	
+			var score6 = function(){};
+			var score7 = false;
+			score3 = "문자";
+			score2 =200;
+			var hh = document.getElementById("here");
+			
+			hh.innerHTML = "객체를 찾기 연습";
+			hh.innerHTML += "<br>== score1 ===============";
+			hh.innerHTML += "<br>"+score1+"타입은"+typeof(score1)+"<br>";
+			hh.innerHTML += "<br>== score2 ===============";
+			hh.innerHTML += "<br>"+score2+"타입은"+typeof(score2)+"<br>";			
+			score1=3.14;
+			hh.innerHTML += "<br>== score1 ===============";
+			hh.innerHTML += "<br>"+score1+"타입은"+typeof(score1)+"<br>";
+			hh.innerHTML += "<br>== score3 ===============";
+			hh.innerHTML += "<br>"+score3+"타입은"+typeof(score3)+"<br>";
+			hh.innerHTML += "<br>== score4 ===============";
+			hh.innerHTML += "<br>"+score4+"타입은"+typeof(score4)+"<br>";
+			hh.innerHTML += "<br>== score5 ===============";
+			hh.innerHTML += "<br>"+score5+"타입은"+typeof(score5)+"<br>";
+			hh.innerHTML += "<br>== score6 ===============";
+			hh.innerHTML += "<br>"+score6+"타입은"+typeof(score6)+"<br>";
+			hh.innerHTML += "<br>== score7 ===============";
+			hh.innerHTML += "<br>"+score7+"타입은"+typeof(score7)+"<br>";
+			
+		}
+	</script>
+</body>
+</html>
