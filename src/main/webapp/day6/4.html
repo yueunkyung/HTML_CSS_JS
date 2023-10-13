@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	function call1() {
+		// var는 함수내에서 local 변수
+		// let는 유효범위가 block
+		for(var i=1; i<=3; i++) {
+			setTimeout(function(){alert(i);}, 100);
+		}
+		//for가 먼저 끝나고 setTimeout이 나중에 수행(문제 : i가 공유)
+		
+		for(let i=1; i<=3; i++) {
+			setTimeout(function(){alert(i);}, 100);
+		}
+		//for가 먼저 끝나고 setTimeout이 나중에 수행(문제 : i가 공유되지 않음)
+	}
+	//function(aa=1){}
+	//function(aa=2){}
+	//function(aa=3){}
+	function call2() {
+		for(var i=1; i<=3; i++) {
+			(function(aa){setTimeout(function(){alert(aa);}, 100);})(i);
+		}		
+	}
+	function call3() {
+		var arr = [1,2,3];
+		arr.forEach(function(value, index, object){
+			setTimeout(function(){alert(value);}, 100);
+		});
+	}
+	function call4() {
+		var url = "http://localhost:9090/aawebProject/emp/empInsert_real.jsp?fname=유은경";
+		var result = "escape<br>" + escape(url) + "<br>";
+		here.innerHTML = result;
+		
+		var result2 = unescape(result);
+		here.innerHTML += "unescape<br>" + result2 + "<br>";
+		
+		var result3 = encodeURIComponent(url);
+		here.innerHTML += "encodeURIComponent<br>" + result3 + "<br>";
+		
+		var result4 = decodeURIComponent(result3);
+		here.innerHTML += "decodeURIComponent<br>" + result4 + "<br>";
+	}
+	function call5() {
+		var s = "a=10;b=20;c=a+b;here.innerHTML = c;";
+		eval(s);		
+	}
+	function call6() {
+		var inpVal1 = document.querySelector("#num1").value;
+		var inpVal2 = document.querySelector("#num2").value;
+		var inpVal3 = document.querySelector("#num3");
+		var op = document.querySelector("#op").value;
+		/*
+		if(op == "+"){
+			
+		}else if(op == "-"){
+			
+		}
+		*/
+		var result = inpVal1 + op + inpVal2;
+		console.log(eval(result));	//문자를 자바스크립트로 변경해서 수행
+		inpVal3.value = eval(result);
+	}
+	function call7() {
+		var a = "100.5$";
+		here.innerHTML = Number(a) ;
+		here.innerHTML += "<br>" + isNaN(Number(a));
+		here.innerHTML += "<br>" + parseInt(a);
+		here.innerHTML += "<br>" + parseFloat(a);
+	}
+	function call8() {
+		call9(100);
+		call9(100, 100, 100);		
+	}
+	function call9(a,b,c) {
+		b = b || 200;
+		c = c || 300;
+		alert(a+b+c);
+	}
+	function call9(a,b,c) {
+		if(!b) b = 11;
+		if(!c) c = 11;
+		alert(a+b+c);
+	}
+	//내부Browser가 지원 안함, 최신 모던브라우저 지원
+	function call9(a,b =99,c=99) {
+		alert(a+b+c);
+	}
+	function call10() {
+		var f = function(a,b){return a+b;};
+		var f2 = (a,b) => a+b;
+		var f3 = function(a){
+			here.innerHTML = a;
+			return a+20;
+		};
+		var f4 = (a) => {
+			here.innerHTML = a;
+			return a+20;
+		};
+		alert(f4(10));
+	}
+	function test2(){
+		here.innerHTML = arguments[0]+arguments[1]+arguments[2];
+	}
+	function test2(a,b,c){
+	     document.getElementById("here").innerHTML = a+b+c + "!!!!";
+	}
+	function test2(...nums){
+	     document.getElementById("here").innerHTML = nums[0]+nums[1]+nums[2] +"$$$";
+	}
+	function test4(a,b,c,d){
+	     document.getElementById("here").innerHTML = a+b+c+d;
+	}
+	function test3(){
+	     arr=[1,2];
+	     test4(...arr, ...arr);
+	     test4(10,20, ...arr);
+	}	
+</script>
+</head>
+<body>
+	<h1>Function!!!</h1>
+	<button onclick="call1()">함수1</button>
+	<button onclick="call2()">함수2</button>
+	<button onclick="call3()">함수3</button>
+	<button onclick="call4()">인코딩/디코드</button>
+	<button onclick="call5()">eval</button><br>
+	<button onclick="call7()">문자->숫자</button><br>
+	<button onclick="call8()">default 매개변수</button><br>
+	<button onclick="call10()">화살표 함수(자바의 람다식)</button><br>
+	<button onclick="test2(10, 20, 30)">전개 연산자</button><br>
+	<button onclick="test3()">전개 연산자2</button><br>
+	<input id="num1" value="10" />
+	<select id="op">
+		<option>+</option>
+		<option>-</option>
+		<option>*</option>
+		<option>/</option>
+	</select>
+	<input id="num2" value="20" />
+	<button onclick="call6()">=</button>
+	<input id="num3" />
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>

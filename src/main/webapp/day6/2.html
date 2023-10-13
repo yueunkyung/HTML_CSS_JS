@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	aa();
+	function aa(){}	//선언적 함수
+	//bb();
+	var bb = function(){};	//익명 함수....리터럴 이용
+	
+	
+	// 1. 호이스팅 단계 : var과 선언적함수를 끌어 올린다.
+	//   선언적 함수(이름있는 함수)
+    //   funtion, var
+    // 2. 실행 단계 : 위에서 아래로 흐른다.(interpreter)
+	
+//window 객체에 onload 이벤트 속성에 기능(function)을 넣는다.
+window.onload = function(){
+	/*
+	var arr = document.querySelectorAll("button");
+	for(let data of arr){
+		console.log(data);
+	}
+	*/
+	var obj1 = document.querySelector("button:nth-of-type(1)");
+	var obj2 = document.querySelector("button:nth-of-type(2)");
+	var obj3 = document.querySelector("button:nth-of-type(3)");
+	var obj4 = document.querySelector("button:nth-of-type(4)");
+	var obj5 = document.querySelector("button:nth-of-type(5)");
+	var obj6 = document.querySelector("button:nth-of-type(6)");
+	var obj7 = document.querySelector("button:nth-of-type(7)");
+	var obj8 = document.querySelector("button:nth-of-type(8)");
+	var obj9 = document.querySelector("button:nth-of-type(9)");
+	var obj10 = document.querySelector("button:nth-of-type(10)");
+	obj1.onclick = f1;	//버튼을 클릭하면 수행할 함수를 연결
+	obj2.onclick = f2;
+	obj3.onclick = f3;
+	
+	//callback함수 : 함수를 받아서 받은 쪽에서 실행한다.
+	obj4.onclick = f4;
+	obj5.onclick = f5;
+	obj6.onclick = f6;
+	obj7.onclick = f7;
+
+	//클로저
+	obj8.onclick = f8;
+	obj9.onclick = f9;
+	
+	
+	//load 후에 수행한다.
+	call(1);call(2);call(3);
+	
+	//익명함수.....즉시실행
+	(function(number) {
+		here.innerHTML += "<br>익명함수(이름이 없는 함수이다.)" + number;
+	})(4);
+	(function(){ console.log("즉시 실행 함수 (function(){})();"); })();
+ 	(function(){})();
+};
+
+var incrementFunc = counter(0);
+function f9() {
+	here.innerHTML = incrementFunc();
+}
+
+function counter(start) {
+	var cnt = start;
+	return function(){
+		cnt++;
+		return cnt;
+	};
+}
+
+function f8() {
+	var ff = f8_call(200);
+	here.innerHTML = ff;
+	
+	ff();
+	
+	f8_call(300)();
+}
+
+function f8_call(score2){
+	//함수를 return 하는 이유는 클로저 때문
+	//지역변수는 지역을 벗어나면 사라진다.(더 이상 사용 불가)
+	//지역변수를 계속 사용하고자 한다.
+	//return 되는 함수에 지역변수를 사용하고 있다면 사라지지 않는다.
+	var score = 100;
+	
+	return function(){
+		alert("함수를 return함" + (score + score2));	
+	};
+}
+
+function f7() {
+	alert("f7함수 입니다.");
+}
+
+function f6() {
+	clearInterval(timer);
+}
+
+function f5() {
+	var ff = function(){
+		here.innerHTML = new Date();
+	};
+	//setInterval : 일정 시간이 지나면 행위를 한다.
+	timer = setInterval(ff, 1000);
+}
+
+function f4() {
+	here.innerHTML = "";
+	var f = function(){
+		here.innerHTML += "<br>함수 !!";
+	};
+	myfunc(f);
+		
+	//callback 함수 : 함수를 매개변수로 받아서 받은 쪽에서 호출한다.
+	function myfunc(aa) {
+		aa();
+		aa();
+		aa();
+	}
+}
+
+function f3() {
+	//arguments가 가변인자 사용시 내장객체 이용
+	sumAll(1,2,3,4,5,6,7,8,9,10);
+	var ret = sumAll(1,2,3,4,5);
+	console.log(ret); //return 값이 없으면 undefined
+	function sumAll(a,b,c,d,e){}
+	function sumAll(){
+		var total = 0;
+		for(let i=0; i<arguments.length; i++) {
+			total += arguments[i];
+		}
+		here.innerHTML += "<br>"+total;
+		return total;	
+	}
+}
+
+//선언적 함수(이름이 있는 함수)
+//자바스크립트는 overloading 불가, override이다.
+//함수 이름이 같으면 override 된다.
+//매개변수 갯수는 확인하지 않는다.(순서대로 적용되며, 적용된 갯수 이상으로 많으면 무시)
+function f2(){
+	alert("매개변수 갯수 확인", "ㅁㅁㅁㅁㅁ");
+		
+	var result = test(100, 200, 300);
+	here.innerHTML = result;
+	
+	//내부함수(함수 안에 함수가 있다.)
+	function test(a, b, c){
+		return a + b + c;
+	}
+	function test(a, b){
+		return a + b;
+	}
+	
+}
+function f1(){
+	here.innerHTML = "함수1 입니다.";
+}
+
+//익명함수(이름이 없는 함수)
+//call변수에 함수를 넣는다.(수행은 안함)
+var call = function(number) {
+	here.innerHTML += "<br>익명함수(이름이 없는 함수이다.) " + number;
+};
+
+</script>
+</head>
+<body>
+	<h1>함수에 대하여~~</h1>
+	<button>함수1</button>
+	<button>함수2</button>
+	<button>함수3</button>
+	<button>함수4(callback)</button>
+	<button>함수5(timer시작)</button>
+	<button>함수6(timer중지)</button>
+	<button>함수7</button>
+	<button>함수8</button>
+	<button>함수9</button>
+	<button>함수10</button>
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>

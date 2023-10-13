@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>JavaScript Function!!!</h1>
+	<script>
+		
+		var call8 = call7();
+		var result = call8();
+		alert("i=" + result);
+		
+		call8();
+		
+		function call7(){
+			var i = 100;
+			return function(){
+				alert("지역변수를 담은 함수를 return함.... 규칙위반(지역변수는 사라져야하는데 유지(클로져))");
+				return ++i;
+			}
+		}
+	</script>
+	<script>
+		var arr = ["hotpink", "green", "skyblue", "orange", "yellow"]
+		
+		var f = function(){
+			var i = (Math.floor(Math.random() * arr.length));
+			document.querySelector("h1").style.backgroundColor = arr[i];
+		};
+		
+		setInterval(f, 3000);
+		
+		call6(function(){
+			alert("익명...파라메터로 전달(callback)");
+		});
+		
+		function call6(f){
+			f();f();f();		
+		}
+		
+		//////////////////////////////////////////////////////
+		function call3(){
+			function call4(){
+				alert("내부함수...선언적");
+			}
+			var call5 = function(){
+				alert("내부함수...익명");
+			};
+		}
+		
+		//////////////////////////////////////////////////////
+		call();	//호이스팅에 의해 function 선언이 끌어 올려짐.
+		//call2(); //오류....함수가 할당되기 전.
+		//선언적함수
+		function call(){
+			alert("선언적 함수");
+		}
+		
+		//익명함수
+		var call2 = function(){
+			alert("익명함수");
+		};
+		
+		call2();
+		
+		//즉시실행
+		(function(){		
+			alert("익명함수##_---즉시실행");
+		})();
+		
+		
+		
+	</script>
+</body>
+</html>

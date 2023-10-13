@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	h1 {
+		background-color: lightgreen;
+		text-align: center;
+	}
+	button {
+		padding: 7px;
+		border-radius: 10px;
+	}
+	button:nth-of-type(1) {
+		background-color: blue;
+	}
+	p {
+		border: 1px solid red;
+	}
+</style>
+<!--
+	./ 현재경로 기준
+	/ 절대경로 기준
+-->
+<script>
+	var a = "자바스크립트";
+</script>
+<script>
+	console.log("1.a=" + a);
+	call();
+</script>
+<script src="./js/external.js"></script>
+<script>
+	console.log("2.a=" + a);
+	call();
+</script>
+</head>
+<body>
+	<h1>반복문</h1>
+	<div>
+		<button mydata="신한">for문1</button>
+		<button>for문2</button>
+		<button>for문3</button>
+		<button>while문</button>
+		<button>do~while문</button>		
+		<button>for in 문</button>		
+		<button>for of 문</button>		
+	</div>
+	<hr>
+	<div id="here">여기</div>
+	<script>
+		var i = 100;
+		var obj = document.querySelector("button:nth-child(1)");
+		var obj2 = document.querySelector("button:nth-child(2)");
+		var obj3 = document.querySelector("button:nth-child(3)");
+		var obj4 = document.querySelector("button:nth-child(4)");
+		var obj5 = document.querySelector("button:nth-child(5)");
+		var obj6 = document.querySelector("button:nth-child(6)");
+		var obj7 = document.querySelector("button:nth-child(7)");
+		console.log(obj);
+		obj.onclick = function(){
+			here.innerHTML = obj.innerHTML;
+			for(var i=1;i<=5;i++) {
+				here.innerHTML += "<p>" + i + "</p>";
+			}
+		};
+		obj2.onclick = function(){
+			here.innerHTML = "<h1>" + i + "</h1>";
+		};		
+		obj3.onclick = function(){
+			//배열 : 같은 타입 또는 여러타입의 값을 여러개 묶음, 추가/삭제 가능
+			var arr = [100, "javascript", true, undefined, {name:"홍길동", age: 20},[10, 20, 30], function(score){alert("나는 함수입니다." + score)}];
+			arr.push("값추가");			
+			here.innerHTML = "<p>" + arr + "</p>";
+			
+			for(let index=0; index<arr.length; index++) {
+				here.innerHTML += "<p>" + arr[index] + "==>" + typeof(arr[index]) + "</p>";
+				if(typeof(arr[index])==="function") {
+					arr[index](100); //function 실행
+				}
+			}
+		};
+		obj4.onclick = function(){
+			var arr = ["HTML5","CSS3","JavaScript","Jquery","ReactJS"];
+			var i=0;
+			
+			var str = "<ul>"
+			while(i<arr.length){
+				str += "<li>"+arr[i]+"</li>";
+				i++;
+			}
+			here.innerHTML= str + "</ul>"
+		};
+		obj5.onclick = function(){
+			var arr = ["HTML5","CSS3","JavaScript","Jquery","ReactJS"];
+			var i=0;
+			
+			var str = "<ul>"
+			do {
+				str += "<li>"+arr[i]+"</li>";
+				i++;				
+			} while (i<arr.length);
+			
+			here.innerHTML= str + "</ul>"			
+		};
+		obj6.onclick = function(){
+			var arr = ["HTML5","CSS3","JavaScript","Jquery","ReactJS"];			
+			var str = "<ul>"
+			for(var i in arr) {
+				if(i==3) continue; //반복문의 시작으로 올라간다.(아래문장 무시)
+				str += "<li>"+arr[i]+"</li>";
+				console.log(typeof(i)); //i는 string 타입임
+				// if(i==2) break; //반복문 빠지기
+			}
+			here.innerHTML= str + "</ul>"			
+		};
+		obj7.onclick = function(){
+			// for of : 자바의 향상 for와 같다.
+			var arr = ["HTML5","CSS3","JavaScript","Jquery","ReactJS"];			
+			var str = "<ul>"
+			for(var data of arr) {
+				str += "<li>" + data + "</li>";
+			}
+			here.innerHTML= str + "</ul>"			
+		};
+		function f1(score){}
+	</script>
+</body>
+</html>
