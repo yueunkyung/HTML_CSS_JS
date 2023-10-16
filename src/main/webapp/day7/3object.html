@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
+<script>
+	window.onload = call;
+	function call(){
+		document.querySelector("button:nth-child(1)").onclick = f1;
+		document.querySelector("button:nth-child(2)").onclick = f2;
+		document.querySelector("button:nth-child(3)").onclick = f3;
+		document.querySelector("button:nth-child(4)").onclick = f4;
+	}
+	
+	function f1() {
+		var arr = [];
+		arr.push(100);
+		arr.push("자바스크립트");
+		arr.push({name: "홍길동1", java: 100, sql: 90, html: 100, js: 88});
+		arr.push({name: "홍길동2", java: 90, sql: 100, html: 99, js: 56});
+		arr.push({name: "홍길동3", java: 80, sql: 70, html: 80, js: 84});
+		arr.push({name: "홍길동4", java: 70, sql: 99, html: 72, js: 59});
+		arr.push({name: "홍길동5", java: 60, sql: 78, html: 60, js: 86});
+		
+		var output = "";
+		for (var idx in arr) {
+			console.log(arr[idx]);
+			if(typeof(arr[idx]) != "object") continue;
+			arr[idx].getSum = function(){
+				return this.java +this.sql + this.html + this.js;
+			};
+			arr[idx].getAvg = function(){
+				return this.getSum() /4;
+			};
+			output += arr[idx].name + "총 점은 " + arr[idx].getSum() + " 평균은 " + arr[idx].getAvg() + "<br>";
+		}
+		here.innerHTML = output;
+		
+		console.log("arr==>"+arr);
+	}
+	
+	function getSum(){
+		return 100;
+	}
+	
+	function makeStudent(name, java, sql, html, js){
+		var obj = {};
+		obj.name = name;
+		obj.java = java;
+		obj.sql = sql;
+		obj.html = html;
+		obj.js = js;
+		
+		obj.getSum = function(){
+			return java + sql + html + js;
+		};
+		obj.getAvg = function(){
+			return obj.getSum() / 4.0;
+		};
+		obj.toString = function (){
+			return name + "==>" + obj.getAvg();
+		};
+		
+		return obj;
+	}
+	
+	function f2() {
+		var arr = [];
+		arr.push(makeStudent("김지원1", 100, 88, 57, 68));
+		arr.push(makeStudent("김지원5", 90, 68, 99, 76));
+		arr.push(makeStudent("김지원3", 95, 78, 57, 45));
+		arr.push(makeStudent("김지원2", 45, 77, 55, 88));
+		arr.push(makeStudent("김지원4", 66, 90, 80, 98));
+	
+		for(let i in arr) {
+			here.innerHTML += "<br>" + arr[i];
+		}
+	
+	}
+	
+	function f3() {
+		//값의 복사
+		var a = 100;
+		var b = a;
+		a = 300;
+		here.innerHTML = a + b;
+	}
+	
+	function f4() {
+		var arr = [10, 20, 30];
+		var obj = {name: "홍길동", age: 20};
+		var arr2 = arr; //주소의 복사
+		var arr3 = clone(arr); //값복사(직접구현)
+		var arr4 = _.clone(arr); //underscorejs 라이브러리의 함수 사용 _.clone - 값복사
+		var arr5 = [...arr, 100]; //전개연산자를 이용한 복제(값 복사 후 추가)
+		
+		var obj2 = obj; //주소의 복사 (2개의 객체가 같은 객체(주소)를 사용한다.)
+		var obj4 = _.clone(obj); //값복사 underscorejs(_).js 사용
+		obj.coffee = "아메리카노";
+		var obj5 = {...obj, coffee:"아메리카노"};
+		
+		arr[0] = 99;
+		obj.age = 30;
+		
+		here.innerHTML = "arr : " + arr;
+		here.innerHTML += "<br> arr2 : " + arr2;
+		here.innerHTML += "<br> arr3 : " + arr3;
+		here.innerHTML += "<br> arr4 : " + arr4;
+		here.innerHTML += "<br> arr5 : " + arr5;
+		here.innerHTML += "<br> obj : " + JSON.stringify(obj);
+		here.innerHTML += "<br> obj2 : " + JSON.stringify(obj2);
+		here.innerHTML += "<br> obj4 : " + JSON.stringify(obj4);
+		
+		//JavaScript Object => 문자열로 변경하기
+		here.innerHTML += "<br> obj5 : " + JSON.stringify(obj5);
+	}
+	
+	function clone(obj){
+		var output = [];  //object인 경우는 {}
+		
+		for(var i in obj){
+			output[i] = obj[i];
+		}
+		
+		return output;
+	}
+   
+</script>
+</head>
+<body>
+	<h1>object에 대하여~~~</h1>
+	<div>
+		<button>object1(배열에 push)</button>
+		<button>object2(객체 생성 함수)</button>
+		<button>object3(값 복사)</button>
+		<button>object4(주소 복사)</button>
+	</div>
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>

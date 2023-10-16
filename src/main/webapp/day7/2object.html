@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+	// 익명 함수
+	window.onload = call;
+	
+	// 선언적 함수
+	function call() {
+		//button 객체들의 이벤트핸들러(기능)를 연결하기
+		document.querySelector("button:nth-of-type(1)").onclick = f1;
+		document.querySelector("button:nth-of-type(2)").onclick = f2;
+		document.querySelector("button:nth-of-type(3)").onclick = f3;
+		document.querySelector("button:nth-of-type(4)").onclick = f4;
+		document.querySelector("button:nth-of-type(5)").onclick = f5;
+	}
+	
+	function f5() {
+		var score =100;
+		var student = {
+			name: "홍길동",
+			age: 20,
+			// 100: "200점"
+		};
+		
+		student.군필 = false;
+		student.score = [100,99,88];
+		student.study = function(){
+			here.innerHTML += "<p>" + this.name + "는 열심히 ~~~~~</p>";
+		};
+		student.toString = function(){
+			
+			delete this.study;
+			
+			var str = "";
+			for(let prop in student){
+				str += "<p>" + prop + "==>" + student[prop] + "</p>";
+			}
+			return str;
+		};
+		
+		console.log(student);
+		console.dir(student);
+		here.innerHTML += student; //자동으로 toString(가 호출된다.)
+
+		//student[변수], student.속성
+		// student[score] ==> score 는 변수
+		// student["score"] ==> "score"는 key값
+		here.innerHTML += "<br> 속성이 존재하는지? " + ("score" in student);
+		here.innerHTML += "<br> score 속성값 ? " + student["score"];
+		// var score =100 주석 해제 했다면, 속성 중에 100이라는 속성(key)이 있는지 확인 없으면 undefined
+		here.innerHTML += "<br>" + student[score]; //var score=100을 막으면 score is not defined 오류		
+		
+		here.innerHTML += "<br>" + student.name + student.age;
+		
+		with(student){
+			here.innerHTML += "<br>" + name + age;			
+		}
+	}
+	
+	function f4() {
+		var person = {
+			"name": "홍길동",
+			"age": 20,
+			군필: true,
+			score: [100,99,88],
+			major: undefined,
+			info: {},
+			study: function(){
+				here.innerHTML += "<br><h1>" + this.name + "가 !! 열심히 공부</h1><br>";
+			},
+			study2: function(){
+				here.innerHTML += "<br>" + this.name + "가 @@ 열심히 공부<br>";
+			},
+		};
+		
+		for(var prop in person) {
+			here.innerHTML += "<br>" + prop + "==>" + person[prop];
+			if(prop == "study" && typeof(person[prop] == "function")) {
+				person[prop]();
+			}
+		}
+		
+	}
+	
+	function f1() {
+		// var age = 1;
+		here.innerHTML = this.innerHTML + "<br>";
+		var arr = ["사과", "바나나", "수박", "오렌지"];
+		
+		here.innerHTML += arr[0] + "type ==>" + typeof(arr);
+	}
+	
+	function f2() {
+		here.innerHTML = this.innerHTML + "<br>";
+		var person = {name: "홍길동", age: 20, major: "컴공", "background color": "black", "background-color": "yellow", backgroundColor: "pink", color: "파란색"};
+		var color = "background-color";
+		
+		here.innerHTML += person.name+": "+person["age"] + "<br>" 
+		+ person["background color"] + "<br>"
+		+ person["background-color"] + "<br>"
+		+ person[color] //변수
+		+ "<br>"
+		//+ person.color	//속성이름
+		+ person.backgroundColor;
+	}
+	
+	function f3() {
+		
+		console.log(window);
+		
+		here.innerHTML = this.innerHTML + "<br>";
+		// var name = "신한금용";
+		var person = {
+			"name": "홍길동",
+			"age": 20,
+			군필: true,
+			score: [100,99,88],
+			major: undefined,
+			info: {},
+			study: function(){
+				here.innerHTML += "열심히 공부<br>";
+			},
+			eat: function(food="치킨"){
+				// alert(name + "(이)가 점심을 먹는다.");
+				
+				//name 변수는 window.name
+				here.innerHTML += name + "가 점심을 먹는다." + "<br>"; 
+				
+			 	// 군필 is not defined
+				//here.innerHTML += 군필 + "가 점심을 먹는다." + "<br>";
+				
+				//object 자신의 속성
+				here.innerHTML += this.군필 + "가 점심을 먹는다." + "<br>"; 
+				
+				here.innerHTML += food + "<br>";
+			}
+		};
+		
+		person.eat("수박");
+		
+		/*
+		for(var prop in person) {
+			here.innerHTML += prop + "==>" + person[prop] + ":" + typeof(person[prop]) + "<br>";
+			if(typeof(person[prop]) == "function"){
+				person[prop]();
+			}
+		}
+		*/
+	}
+</script>
+</head>
+<body>
+	<h1>object에 대하여~~~</h1>
+	<button>object1</button>
+	<button>object2</button>
+	<button>object3</button>
+	<button>object4</button>
+	<button>object5(동적추가)</button>
+	<hr>
+	<div id="here"></div>
+</body>
+</html>

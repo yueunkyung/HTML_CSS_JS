@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="https://cdn.jsdelivr.net/npm/underscore@1.13.6/underscore-umd-min.js"></script>
+<script>
+	window.onload = call;
+	function call() {
+		//querySelectorAll : selector에 일치하는 모든 요소를 선택
+		//querySelector : selector에 일치하는 첫번째 요소 1개만 선택
+		//button:nth-child(1) : 자식요소로 맨 처음 나오는 버튼
+		document.querySelectorAll("button:nth-child(1)")[0].onclick = f1;
+		document.querySelectorAll("button:nth-child(1)")[1].onclick = f1;
+		document.querySelector("button:nth-child(2)").onclick = f2;
+		document.querySelector("button:nth-child(3)").onclick = f3;
+		document.querySelector("button:nth-child(4)").onclick = f4;
+		document.querySelector("button:nth-child(5)").onclick = f5;
+		document.querySelector("button:nth-child(6)").onclick = f6;
+		document.querySelector("button:nth-child(7)").onclick = f7;
+		document.querySelector("button:nth-child(8)").onclick = f8;
+		document.querySelector("button:nth-child(9)").onclick = f9;
+		document.querySelector("button:nth-child(10)").onclick = f10;
+	}
+	
+	//생성자 함수 : 정의 시 대문자 시작, 생성시는 new
+	function Student(name, java, sql, html, js){
+		var name = name; //지역 변수(캡슐화)
+		this.java = java;
+		this.sql = sql;
+		this.html = html;
+		this.js = js;
+		
+		this.getName = function() {
+			return name;
+		};
+	}
+	
+	function f1() {
+		here.innerHTML = "<p>첫번째 버튼</p>";
+		
+		//메모리는 더 효율적이다. prototype은 객체들이 공유하는 공간
+		Student.prototype.getSum =function(){return this.java + this.sql + this.html + this.js;};
+		Student.prototype.getAvg =function(){return this.getSum() / 4.0;};
+		Student.prototype.toString =function(){return this.getName() + "==>" +"자바점수 : "+ this.java +" 평균 : "+ this.getAvg();};
+		
+		var arr = [];
+		arr.push(new Student("김길동1", 80, 100, 68, 45));
+		arr.push(new Student("김길동2", 88, 57, 85, 53));
+		arr.push(new Student("김길동4", 54, 83, 54, 45));
+		arr.push(new Student("김길동5", 48, 54, 80, 50));
+		arr.push(new Student("김길동3", 79, 78, 70, 77));
+		
+		var output = "";
+		for(let i in arr) {
+			console.log(arr[i]);
+			output += "<p>" + arr[i] + "</p>";
+		}
+		
+		output += "<hr><h1>sort1 - 평균으로 Ascending</h1>";
+		
+		//1.sort 기준 정하기(익명함수 또는 화살표 함수)
+		arr.sort((a, b) => a.getAvg() - b.getAvg());
+		
+		//1~3등까지 출력하기
+		var arr2 = arr.slice(0,3);
+		
+		for(let i in arr2) {
+			console.log(arr2[i]);
+			output += "<p>" + arr2[i] + "</p>";
+		}
+		
+		output += "<hr><h1>sort2(underscore.js) - 자바 점수로 Descending</h1>";		
+		arr = _.sortBy(arr, "java").reverse();		
+		
+		for(let i in arr) {
+			console.log(arr[i]);
+			output += "<p>" + arr[i] + "</p>";
+		}
+		
+		here.innerHTML += output;
+	}
+	
+	function f2() {
+		here.innerHTML = "<p>2번째 버튼</p>";
+		
+		//생성자 함수를 이용
+		var s1 = new Student("김길동1!!", 80, 100, 68, 45);
+		
+		//일반 함수 호출
+		var s2 = Student("김길동2!!", 80, 100, 68, 45);
+		here.innerHTML += "<p>" + s1.getName() + "</p>";
+		here.innerHTML += "<p>" + window.name + "</p>";
+		
+		console.log(window);
+	}
+	
+	function f3() {
+		here.innerHTML = "<p>3번째 버튼</p>";
+		
+		var a = 100;
+		//Number는 JavaScript가 만들어 놓은 내장객체(속성 + 행위)
+		var b = new Number(200);
+
+		here.innerHTML += a.toString() + 300 + "<br>";
+		here.innerHTML += b.toString() + 300 + "<br>";
+		
+		// var a = 100; => 기본형은 속성과 메서드 추가 불가, 기존 속성과 메서드는 사용 가능
+		a.score = 500;
+		a.mymethod = function(){return 1;};
+		// here.innerHTML += a.score + "<br>"; 
+		// here.innerHTML += a.mymethod() + "<br>";	
+		
+		// var b = new Number(200); => 객체형에 속성과 메서드 추가
+		b.score = 600;
+		b.mymethod = function(){return 700;};
+		console.log(b);
+		here.innerHTML += b.score + "<br>";	
+		here.innerHTML += b.mymethod() + "<br>";	
+	}
+	
+	function f4() {
+		here.innerHTML = "<p>4번째 버튼</p>";
+		
+		var aa = new Number(10); //자바 => Integer aa = new Integer(10);
+		aa.속성1 = "값1";
+		aa.속성2 = "값2";
+		aa.print1 = function(){};
+		aa.print2 = function(){};
+		Number.prototype.print3 = function(){return 30;};
+	
+		console.log(aa);
+		
+		var bb = 20;	//number 타입, Number 내장객체의 공유 영역(prototype)의 기능 사용가능
+		console.log(bb);
+		here.innerHTML += bb.print3();
+		
+	}
+	
+	function f5() {
+		here.innerHTML = "<p>5번째 버튼</p>";
+		
+		var aa = new Number(10);
+		console.log(aa);
+	}
+	
+	function f6() {
+		var obj = {};
+		var obj2 = new Object();
+		
+		obj2.속성1 = "값1";
+		obj2.속성2 = "값2";
+		
+		var output = "";
+		output += "hasOwnProperty: " + obj2.hasOwnProperty("속성1") + "<br>";
+		output +=  "in : " + ("속성1" in obj2 ) + "<br>";
+		
+		here.innerHTML += output;
+		here.innerHTML += true + true + "<br>";
+			
+	}
+	
+	function f7() {
+		var str = "hello, javascript";
+		
+		here.innerHTML += "<br>" + str.toUpperCase();
+		here.innerHTML += "<br>" + str.substr(7, 4); //갯수 작성 - 7번째부터 문자 4개
+		here.innerHTML += "<br>" + str.substring(7, 11); //index 위치 - 7번째부터 11번째 전까지
+	}
+	
+	function f8() {
+		var arr1 = [];
+		var arr2 = new Array(); //[]
+		var arr3 = new Array(5);
+		var arr4 = new Array(100, 200, 300);
+		
+		here.innerHTML += "<br>" + arr4; //구분자는 콤마
+	}
+	
+	function f9() {
+		var arr4 = new Array(900, 100, 700, 200, 500, 300);
+		
+		//기본은 Ascending Sort가 된다.
+		//arr4.sort();
+		
+		//Descending Sort
+		arr4.sort(function(a, b){
+			return b - a;
+		});
+		
+		here.innerHTML += "<br>" + arr4.join("**");
+	}
+	
+	function f10() {}
+</script>
+</head>
+<body>
+	<h1>object에 대하여~~~</h1>
+	<div>
+		<button>object1(생성자함수)</button>
+		<button>object2(New 사용)</button>
+		<button>내장객체(기본형, 객체 차이점)</button>
+		<button>Number내장객체</button>
+		<button>Number내장객체</button>
+		<button>Object내장객체</button>
+		<button>String내장객체</button>
+		<button>Array내장객체</button>
+		<button>Array내장객체2</button>
+		<button>내장객체</button>
+		<button>내장객체</button>
+		<button>내장객체</button>
+	</div>
+	<div>
+		<button>나도 버튼</button>
+	</div>
+	<hr>
+	<div id="here">여기</div>
+</body>
+</html>
