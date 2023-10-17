@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<title>BOM(Browser Object Model) 연습</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+	<style>
+		body {
+			padding: 20px;
+		}
+	</style>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="external.js"></script>
+	<script>
+		window.onload = call;
+		function call() {
+			document.querySelector("button:nth-child(1)").onclick = f1;
+			document.querySelector("button:nth-child(2)").onclick = f2;
+			document.querySelector("button:nth-child(3)").onclick = f3;
+			document.querySelector("button:nth-child(4)").onclick = f4;
+			document.querySelector("button:nth-child(5)").onclick = f5;
+			document.querySelector("button:nth-child(6)").onclick = f6;
+		}
+
+		var score = 100;
+
+		//window
+		function f1() {
+			var output = "<ul>";
+
+			console.log(score);
+			console.log(window.score);
+			for (let prop in window) {
+				output += "<li>" + prop + "==>" + window[prop] + "</li>";
+			}
+			output += "</ul>";
+			here.innerHTML += output;
+
+			//window.open("1.html");
+
+			function innerF() {
+
+			}
+		}
+
+		//location
+		function f2() {
+			var output = "<ul>";
+
+			for (let prop in location) {
+				output += "<li>" + prop + "==>" + location[prop] + "</li>";
+			}
+			output += "</ul>";
+			here.innerHTML += output;
+
+		}
+
+		//history
+		function f3() {
+			var output = "<ul>";
+
+			for (let prop in history) {
+				output += "<li>" + prop + "==>" + history[prop] + "</li>";
+			}
+			output += "</ul>";
+			here.innerHTML += output;
+		}
+
+		//screen
+		function f4() {
+			var output = "<ul>";
+
+			for (let prop in screen) {
+				output += "<li>" + prop + "==>" + screen[prop] + "</li>";
+			}
+			output += "</ul>";
+			here.innerHTML += output;
+		}
+
+		//document
+		function f5() {
+			var output = "<ul>";
+
+			for (let prop in document) {
+				output += "<li>" + prop + "==>" + document[prop] + "</li>";
+			}
+			output += "</ul>";
+			here.innerHTML += output;
+		}
+
+		//navigator
+		function f6() {
+			var output = "<ul>";
+
+			for (let prop in navigator) {
+				output += "<li>" + prop + "==>" + navigator[prop] + "</li>";
+			}
+			output += "</ul>";
+			here.innerHTML += output;
+		}
+
+	</script>
+</head>
+
+<body>
+	<h1>BOM(Browser Object Model)에 대하여~~~</h1>
+	<div>
+		<button>window</button>
+		<button>location</button>
+		<button>history</button>
+		<button>screen</button>
+		<button>document</button>
+		<button>navigator</button>
+		<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">
+			모달 띄우기
+		</button>
+		<button id="btn1">location(위치이동)</button>
+		<button id="btn2">navigator(스마트폰)</button>
+		<button id="btn3">history(뒤로가기)</button>
+	</div>
+	<script>
+		
+		document.querySelector("#btn3").onclick = function () {
+			history.back();
+		}
+		
+		document.querySelector("#btn2").onclick = function () {
+			var userAgent = navigator.userAgent;
+			var smartPhones = ["iphone", "ipod", "android"];
+			for (var i in smartPhones) {
+				if (userAgent.toLocaleLowerCase().match(new RegExp(smartPhones[i]))) {
+					if (window.orientation == 0 | window.orientation == 180)
+						alert("스마트폰 페이지로 이동합니다...세로");
+					else
+						alert("스마트폰 페이지로 이동합니다...가로");
+					location.href = "http://m.naver.com";
+				}
+			}
+		}
+
+		document.querySelector("#btn1").onclick = function () {
+			//1)상대경로
+			//location.href = "../day7/4생성자함수.html";
+
+			//2)절대경로
+			//location.href = "http://localhost:9090/aawebProject/day7/4생성자함수.html";
+			var path = location.pathname;
+			var arr = path.split("/"); //  /aawebProject/day8/2.html -> /기준으로 잘라내서 arr[0]은 빈 문자가 오는게 맞다
+			console.log(arr[1]);
+			//location.href = location.origin + "/" + arr[1] + "/day7/4생성자함수.html";	//history(뒤로가기)에 남음.
+			//location.replace(location.origin + "/" + arr[1] + "/day7/4생성자함수.html");	//history(뒤로가기)에 남지 않음.
+			location.assign(location.origin + "/" + arr[1] + "/day7/4생성자함수.html");	//history(뒤로가기)에 남음.
+
+			//새로고침
+			//location.reload();
+		};
+	</script>
+	<hr>
+	<div id="here">여기<br></div>
+
+	<!-- The Modal -->
+	<div class="modal" id="myModal">
+		<div class="modal-dialog">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Modal Heading</h4>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					Modal body..
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+				</div>
+
+			</div>
+		</div>
+	</div><!-- //END The Modal -->
+
+</body>
+
+</html>

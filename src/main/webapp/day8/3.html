@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>DOM(Document Object Model) 연습</title>
+	<style>
+		#here {
+			width: 500px;
+			height: 400px;
+			border: 2px dotted darkblue;
+		}
+		.orange {
+			border: 1px solid orange;
+		}
+	</style>
+	<script>
+		window.onload = call;
+		function call() {
+			document.querySelector("button:nth-child(1)").onclick = f1;
+			document.querySelector("button:nth-child(2)").onclick = f2;
+			document.querySelector("button:nth-child(3)").onclick = f3;
+			document.querySelector("button:nth-child(4)").onclick = f4;
+			document.querySelector("button:nth-child(5)").onclick = f5;
+			document.querySelector("button:nth-child(6)").onclick = f6;
+			document.querySelector("button:nth-child(7)").onclick = f7;
+			document.querySelector("button:nth-child(8)").onclick = f8;
+		}
+		
+		function f1() {
+			var ele = document.createElement("p"); //<p></p>
+			var txt = document.createTextNode("Hello");
+			ele.appendChild(txt);
+			console.log("ele", ele);
+			
+			var here = document.getElementById("here"); //<div id="here">여기</div>
+			here.appendChild(ele);
+		}
+		
+		function f2() {			
+			var here = document.getElementById("here"); //<div id="here">여기</div>
+			here.innerHTML += "<p>Hello!@!@@!!</p>";
+		}
+		
+		function f3() { 
+			var ele = document.createElement("img"); //<img />
+			ele.src = "../html5-css3-master/01/images/watch.jpg";
+			ele.width = 100;
+			ele.heihgt = 100;
+			//존재하지 않는 속성을 setting하고자 한다.
+			//ele.mydata = "자바스크립트";	//불가
+			ele.setAttribute("mydata","자바스크립트");	//가능
+			
+			var here = document.getElementById("here"); //<div id="here">여기</div>
+			here.innerHTML = "";
+			here.appendChild(ele);
+			
+			//속성 얻기
+			//존재하지 않는 속성은 getAttribute 사용하여 얻는다
+			var ele2 = document.querySelector("div img");
+			var output = ele2.src + "<br>" + ele2.getAttribute("mydata");
+			here.innerHTML += "<p>" + output + "</p>";
+		}
+		
+		function f4() {
+			var here = document.getElementById("here"); //<div id="here">여기</div>
+			here.innerHTML = "<img src='../html5-css3-master/01/images/first.jpg' width='150' height='150' />"
+		}
+		
+		function f5() { 
+			// var bs = document.getElementsByTagName("button");
+			var bs = document.querySelectorAll("button");
+			
+			for(let i=0; i<bs.length; i++) {
+				bs[i].innerHTML += "!";
+			}
+		}
+		
+		function f6() { 
+			//var fruits = document.getElementsByName("fruit");
+			var fruits = document.querySelectorAll("input[name='fruit']");
+			
+			for(let i=0; i<fruits.length; i++) {
+				alert(fruits[i].checked);
+			}
+		}
+		
+		function f7() {
+			//var aa = document.getElementsByClassName("orange");
+			var aa = document.querySelectorAll(".orange");
+			for(let i=0; i<aa.length; i++) {
+				aa[i].style.border = "5px dotted red";
+			}
+		}
+		
+		function f8() {
+			var img = document.querySelector("div img");
+			var here = document.querySelector("#here");
+			
+			//here.removeChild(img);
+			img.parentNode.removeChild(img);
+		}
+	</script>
+</head>
+
+<body>
+	<h1 class="orange">DOM(Document Object Model)에 대하여~~~</h1>
+	<div class="orange">
+		<button>DOM객체생성(함수이용)</button>
+		<button>DOM객체생성(innerHTML)</button>
+		<button>DOM객체생성(img)</button>
+		<button>DOM객체생성(img2)</button>
+		<button>getElementsByTagName</button>
+		<button>getElementsByName</button>
+		<button>getElementsByClassName</button>
+		<button>removeChild</button>
+		<hr>
+		<label><input name="fruit" type="checkbox" checked />바나나</label>
+		<label><input name="fruit" type="checkbox" checked />사과</label>
+		<label><input name="fruit" type="checkbox" />귤</label>
+		<label><input name="fruit" type="checkbox" />한라봉</label>
+	</div>
+	<div id="here">여기<br></div>
+</body>
+
+</html>
