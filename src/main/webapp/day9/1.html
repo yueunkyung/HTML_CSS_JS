@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>event에 대하여</title>
+<style>
+	div, h1, span {
+		border: 1px solid gray;
+		padding: 10px;
+		margin: 10px;
+	}
+	#here span {
+		color: darkgoldenrod;
+	}
+</style>
+<script>
+	//onload => 이벤트 속성
+	//call => 이벤트 핸들러, 이벤트 리스너
+	//이벤트에 이벤트 핸들러를 연결
+	window.onload = call;
+	
+	//선언적 함수
+	function call(e) {
+		console.dir(e);
+		document.querySelector("button:nth-of-type(1)").onclick = f1;
+		document.querySelector("button:nth-of-type(2)").onclick = f2;
+	}
+	
+	function f1(e) {
+		var e = e || window.event;
+		console.dir(e);		
+		alert("1번째 버튼");
+	}
+	
+	function f2() {
+		alert("2번째 버튼");
+		f1();
+		//document.querySelector("button:nth-of-type(1)").onclick();
+	}
+	
+	function f3() {
+		//form의 onsubmit 이벤트는 submit 버튼 클릭 시 자동으로 실행되는 default event
+		//default event는 이미 구현되어 있다.
+		//default event를 취소하려면 return false를 사용한다. //<form onsubmit="return f3();">
+		
+		/*
+			var userid = document.querySelector("input[name='userid']").value;
+			if(userid == "") return false;	
+		*/
+		
+		var obj1 = document.querySelector('input[name="userpass1"]');
+		var obj2 = document.querySelector('input[name="userpass2"]');
+		var pass1 = obj1.value;
+		var pass2 = obj2.value;
+		
+		if(pass1!=pass2) {
+			alert("비밀번호를 올바르게 입력하세요.");
+			obj1.value = "";
+			obj2.value = "";
+			obj1.focus();
+			return false; //default evnet 취소
+		}		
+	}
+</script>
+</head>
+<body>
+	<h1>event에 대하여</h1>
+	<button>event 파마레터1</button>
+	<button>event 파마레터2</button>
+	<button onclick="alert(this.textContent);">event모델(DOM level0) - inline</button>
+	<button id="btn1">event모델(DOM level0) - 고전방식</button>
+	<button id="btn2">event모델(DOM level2) - IE</button>
+	<div id="outerdiv">
+		<button id="btn3">event모델(DOM level2) - 표준</button>
+	</div>
+	<script>
+		document.querySelector("#btn1").onclick = function() {
+			alert(this.textContent);
+		};
+		
+		/*
+		document.querySelector("#btn2").attachEvent("onclick", function() {
+			alert(this.textContent);
+		});
+		*/
+		
+		// useCapture, bubbling 단계에서 이벤트 수행
+		// useCapture : true이면 부모가 자식으로 갈때 수행한다.(flow : 부모 -> 본인, default는 false 본인 -> 부모)
+		// bubbling : default, 자식에서 부모로 이벤트가 전달된다.
+		document.querySelector("#outerdiv").addEventListener("click", function(){
+			console.log("button 밖의 div");
+		}, true);
+		
+		document.querySelector("#btn3").addEventListener("click", call3);
+		
+		function call3() {
+			console.log(this.textContent);
+			event.stopPropagation();
+		}
+	</script>
+	<hr>
+	<br>
+	<form action="./login.jsp" method="get" onsubmit="return f3();">
+		아이디:<input name="userid" required />
+		비밀번호1:<input name="userpass1" type="password" required />
+		비밀번호2:<input name="userpass2" type="password" required />
+		<input type="submit" value="서버전송" />
+	</form>
+	<br>
+	<div id="here" onclick="alert('div#here 누름');">
+		here
+		<div onclick="alert('#here > div 누름');">
+			div
+			<h1>
+				이벤트 <span>캡처링과 버블링</span> 연습
+			</h1>
+		</div>
+	</div>
+	<script>
+		document.querySelector("#here h1").onclick = function(event) {
+			alert("h1에서 이벤트 전달을 막기(이벤트 버블링 제어)");
+			event.cancelBubble = true;
+		};
+		
+		document.querySelector("#here span").onclick = function(event) {
+			alert("span에서 이벤트 전달을 막기(이벤트 버블링 제어)");
+			if(event.stopPropagation) event.stopPropagation();
+			event.cancelBubble = true;
+		};
+		
+	</script>
+</body>
+</html>

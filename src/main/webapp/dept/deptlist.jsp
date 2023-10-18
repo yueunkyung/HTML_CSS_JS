@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>부서 목록</title>
 </head>
 <body style="margin: 50px 0 100px;">
 	<h1>부서 목록</h1>

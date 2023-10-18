@@ -81,9 +81,104 @@
     #container h1::before, #container h1::after {
     	content:"**********";
     }
+	tbody  {
+		counter-reset: mycount;
+	}
+	.aa::before {
+		 counter-increment: mycount;
+		 content: "[[@@" counter(mycount) "@@]]";
+	}    
+    .hotpink {
+    	background-color: hotpink;
+    }
+    .yellow {
+    	background-color: yellow;
+    }
+    .white {
+    	background-color: white;
+    }
 </style>
+<script>
+	window.onload = call;
+	
+	function call() {
+		// onclick => event 속성
+		// f1 => 이벤트핸들러, 이벤트리스너
+		document.querySelector("#search1").onclick = f1;
+		document.querySelector("#search2").onclick = f2;
+		document.querySelector("#search3").onclick = f3;
+		document.querySelector("#btnClearAll").onclick = f4;
+		document.querySelector("#reload").onclick = function() {
+			location.reload();
+		};
+		
+		function f1() {
+			var fname = document.querySelector("#fname").value.toLowerCase();
+			alert(fname);
+			var nodeList = document.querySelectorAll("tbody tr td:nth-child(3)");
+			var bgColor = "hotpink";
+			
+			nodeList.forEach(function(ele) {				
+				if(ele.textContent.trim().toLowerCase().startsWith(fname)) ele.className = bgColor;
+				else {
+					// ele.className = white;
+					ele.classList.remove(bgColor);
+					//**자리를 차지하지 않음 : display
+					//ele.parentNode.style.display = "none";
+					//**자리를 차지함 : visibility
+					//ele.parentNode.style.visibility = "hidden";
+				}
+			});
+		};
+		
+		function f2(event) {
+			var event = event || window.event;
+			
+			for(let prop in event){
+				console.log("prop : ", prop, "========event[prop] : ", event[prop]);
+			}
+			
+			var salary = Number(document.querySelector("#salary").value);
+			alert(salary);
+			var nodeList = document.querySelectorAll("tbody tr td:nth-child(9)");
+			var bgColor = "yellow";
+			
+			nodeList.forEach(function(ele) {
+				if(Number(ele.textContent.trim().startsWith(salary))) ele.className = bgColor;
+				else {
+					// ele.className = white;
+					ele.classList.remove(bgColor);
+				}
+			});			
+		};
+		
+		function f3() {
+			//이벤트 호출
+			document.querySelector("#search2").onclick();
+			
+			//함수 호출
+			// f2();
+		}
+		
+		function f4() {
+			var nodeList = document.querySelectorAll("tbody tr td");
+
+			nodeList.forEach(function(ele) {
+				ele.classList.remove("hotpink", "yellow");
+			});	
+		}
+	}
+</script>
 </head>
 <body>
+	<div>
+		<input id="fname" /><button id="search1">시작하는 이름찾기</button><br>
+		<input id="salary" /><button id="search2">&gt;=급여찾기</button>
+		<button id="search3">&gt;=급여찾기2</button><br>
+		<br>
+		<button id="btnClearAll">class 모두제거</button>
+		<button id="reload">reset(새로고침)</button><br>
+	</div>
 	<div>
 		<h1>p가 1개인 경우</h1>
 		<p>Only Child</p>
@@ -114,7 +209,7 @@
 					i++;
 				%>				
 					<tr seq="<%= i %>">
-						<td><%= i %></td>
+						<td class="aa"><%= i %></td>
 						<td>
 							<a href="empDetail.jsp?empid=<%= emp.getEmployee_id() %>">
 								<%= emp.getEmployee_id() %>

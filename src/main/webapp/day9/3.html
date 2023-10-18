@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Ajax(비동기 처리)</title>
+</head>
+<body>
+<h1>JavaScript를 이용해서 Ajax(비동기 처리)</h1>
+<a href="2.html">다른 페이지 요청(a이용)</a>
+<button id="btn1">다른페이지 요청</button>
+<button id="btn2">페이지 이동없이 다른페이지 요청(Ajax1동기)</button>
+<button id="btn3">페이지 이동없이 다른페이지 요청(Ajax2비동기)</button>
+<br />
+<br />
+<input type="number" id="deptid" />
+<button id="btn4">부서 정보 가져오기</button>
+<button id="btn5">직원 정보 가져오기</button>
+<br />
+<br />
+<hr />
+<br />
+<div id="here">여기</div>
+<script>
+	var btn1 = document.querySelector("#btn1");
+	var btn2 = document.querySelector("#btn2");
+	var btn3 = document.querySelector("#btn3");
+	var btn4 = document.querySelector("#btn4");
+	var btn5 = document.querySelector("#btn5");
+	btn1.addEventListener("click", f1);
+	btn2.addEventListener("click", f2);
+	btn3.addEventListener("click", f3);
+	btn4.addEventListener("click", f4);
+	btn5.addEventListener("click", f5);
+	
+	function f1() {
+		location.href = "2.html";
+	}
+	
+	function f2() {
+		//동기처리(false: 비동기 의미)
+		//open()메서드 => open(전송방식, 경로, 비동기 사용 여부)
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "2.html", false);
+		xhr.send();
+		document.querySelector("#here").innerHTML = xhr.responseText;
+	}
+	
+	function f3() {
+		//비동기처리(true: 동기 의미)
+		//open()메서드 => open(전송방식, 경로, 비동기 사용 여부)
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "data.json", true);
+		xhr.send();
+		xhr.onreadystatechange = function() {
+			console.log("readyState", xhr.readyState);
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				//정상적으로 서버에서 값이 도착한 것임.
+				var str = xhr.responseText;
+				var obj = JSON.parse(str);				
+				console.log(obj["name"]);
+				var output = "<ul>";
+				for(let prop in obj) {
+					output+= "<li>" + prop + "==>" + obj[prop] + "</li>";
+				}
+
+				document.querySelector("#here").innerHTML = output + "</ul>";
+			}
+		};
+	}
+	
+	function f4() {
+		//ajax의 목적은 화면 이동 없이 서버에 data 요청해서 받아서 처리
+		var xhr = new XMLHttpRequest();
+		var did = document.querySelector("#deptid").value;
+		xhr.open("get", "deptInfo.jsp?deptid="+did, true); //open(전달방식, url, 비동기 여부)
+		
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				var str = xhr.responseText;
+				var obj = JSON.parse(str);				
+				console.log(obj["name"]);
+				var output = "<ul>";
+				for(let prop in obj) {
+					output+= "<li>" + prop + "==>" + obj[prop] + "</li>";
+				}
+
+				document.querySelector("#here").innerHTML = output + "</ul>";
+			}
+		};
+		xhr.send();
+	}
+	
+	function f5() {
+		//ajax의 목적은 화면 이동 없이 서버에 data 요청해서 받아서 처리
+		var xhr = new XMLHttpRequest();
+		var id = document.querySelector("#deptid").value;
+		xhr.open("get", "empInfo.jsp?empid="+id, true); //open(전달방식, url, 비동기 여부)
+		
+		xhr.onreadystatechange = function() {
+			if(xhr.readyState == 4 && xhr.status == 200) {
+				var str = xhr.responseText;
+				var obj = JSON.parse(str);				
+				var output = "<ul>";
+				for(let prop in obj) {
+					output+= "<li>" + prop + "==>" + obj[prop] + "</li>";
+				}
+
+				document.querySelector("#here").innerHTML = output + "</ul>";
+			}
+		};
+		xhr.send();
+		
+	}
+</script>
+</body>
+</html>

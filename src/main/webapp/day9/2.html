@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>event handler</title>
+<style>
+	div, h1, sapn {
+		border: 1px solid gray;
+		padding: 20px;
+		margin: 10px;
+	}
+	span {
+		background-color: orange;
+	}
+	div div {
+		border: 5px dotted purple;
+	}
+</style>
+<script>
+	window.addEventListener("load", f1);
+	
+	function f1() {
+		//useCapture = true : 부모 먼저 수행되고 자식 것이 수행
+		//useCapture = false : 나를 먼저하고 부모를 수행 default
+		var obj1 = document.querySelector(".C");
+		var obj2 = document.querySelector(".D");
+		obj1.addEventListener("click", f2, true);
+		obj2.addEventListener("click", f3);
+	}
+	
+	function f2() {
+		alert("div1--outer");
+	}
+	function f3(event) {
+		alert("div1--inner");
+		//나의 이벤트 수행이 부모에 전달하지 않기
+		event.stopPropagation();		
+	}
+</script>
+</head>
+<body>
+	<h1>event에 대하여</h1>
+	<button id="btn1">예외처리</button>	
+	<script>
+		//예외처리
+		document.querySelector("#btn1").addEventListener("click", f4);
+		
+		function f4() {
+			try {
+				var arr = new Array(100);
+				var b = 0;
+				if(b == 0) throw "0으로 나눌 수 없다."
+				var a = 10/b;
+				alert("try임 "+ a);
+			} catch(ex) {
+				var output = "";
+				for(let i in ex) {
+					output += ex[i];
+				}
+				alert("catch임 " + output);
+			} finally {
+				alert("finally임");
+			}
+		}		
+	</script>
+	<h2>표준이벤트 연결</h2>
+	<div class="C">
+		<div class="D">
+			<h1>event에 <span>handler</span> 연결</h1>
+		</div>
+	</div>
+	<h2>inline</h2>
+	<div class="A" onclick="alert('div1');">
+		<div class="B" onclick="alert('div2');">
+			<h1 onclick="alert('h1');">event에 <span onclick="alert('span');">handler</span> 연결</h1>
+		</div>
+	</div>
+</body>
+</html>
