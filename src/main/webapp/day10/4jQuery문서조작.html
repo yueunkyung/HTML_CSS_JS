@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery를 이용해서 문서조작1</title>
+<script src="../jslib/jquery-3.7.1.min.js"></script>
+<script>
+	$(function(){
+		$("#btn1").click(f1);
+		$("#btn2").click(f2);
+		$("#btn3").click(f3);
+		$("#btn4").click(f4);
+		$("#btn5").click(f5);
+		$("#btn6").click(f6);
+		$("#btn7").click(f7);
+		$("#btn8").click(f8);
+		$("#btn9").click(f9);
+	})
+	
+	function f1() {
+		$("#m_3 img:nth-of-type(1)").attr("src", "../day8/ch3.png");
+	}
+	
+	function f2() {
+		var obj = {
+			"src" : "../day8/ch3.png",
+			"width" : "200px",
+			"height": "200px"
+		}
+		$("#m_3 img:nth-of-type(2)").attr(obj);
+	}
+	
+	function f3() {
+		var obj = {
+			"src" : "../day8/ch3.png",
+			"width" : function(){return 100 + 200;},
+			"height": "200px"
+		}
+		$("#m_3 img:nth-of-type(3)").attr(obj);
+	}
+	
+	function f4() {
+		var obj = {
+			"src" : "../day8/ch3.png",
+			"width" : function(index) {
+				console.log(index);
+				return 50*(index+1);
+			},
+			"height":function(index) {
+				console.log(index);
+				return 100*(index+1);
+			}
+		}
+		$("#m_3 img:nth-of-type(2n+1)").attr(obj);
+	}
+	
+	function f5() {
+		var arr = ["#ffe1e1", "#bde7bd", "#e3e3ff"];
+		$("h4").css({
+			"backgroundColor": function(index){
+				return arr[index];
+			}, "color" : function(index){
+				return "rgb("+makeRGB()+")";
+			}
+		});
+	}
+	
+	function makeRGB() {
+		const r = Math.floor(Math.random() * 256);
+		const g = Math.floor(Math.random() * 256);
+		const b = Math.floor(Math.random() * 256);
+		
+		return [r, g, b];		
+	}
+	
+	// 쌤이 준 rgb color ///////////////////////////////////////////////////
+	/*
+	function randomColor() {
+		return "#" + Math.round(Math.random() * 0xffffff).toString(16);
+	};
+	
+	function f5() {
+		
+		var color1 = randomColor();
+		var color2 = randomColor();
+		var color3 = randomColor();
+		var arr2 = [color1, color2, color3];
+	
+		var arr = ["red", "green", "blue"];
+		$("h4").css({"backgroundColor": function(index){
+									   return arr[index];
+									}, 
+					"color": function(index){ 
+						 return  arr2[index];}
+		           });
+	}
+	*/
+	/////////////////////////////////////////////////////////////////////////
+	
+	//html은 태그로 인식해서 작성
+	function f6() {
+		$("#m_3").html("<h1>html문서변경</h1>");
+		$("h4").html(function(index) {
+			var original =$(this).html();
+			
+			return `${original}<h${index+1}>####${index+1}</h${index+1}>`;
+		});
+	}
+	
+	//text은 글자로만 인식해서 작성
+	function f7() {
+		$("#m_3").text("<h1>text문서변경</h1>");
+	}
+		
+	function f8() {
+		//$("#m_3").remove();	//객체를 제거
+		$("#m_3").empty();	//내부만 제거
+	}	
+	
+	function f9() {
+		var target = $("#m_3");
+		$("<h1 style='color: purple'></h1>").html("동적 객체 생성 - appendTo").appendTo(target);
+		$("<h1 style='color: red'></h1>").html("동적 객체 생성 - prependTo").prependTo(target);
+		$("<h1 style='color: blue'></h1>").html("동적 객체 생성 - after").insertAfter(target);
+		$("<h1 style='color: green'></h1>").html("동적 객체 생성 - before").insertBefore(target);
+	}
+</script>
+</head>
+<body>
+	<button id="btn1">이미지 속성 변경1</button>
+	<button id="btn2">이미지 속성 변경2</button>
+	<button id="btn3">이미지 속성 변경3</button>
+	<button id="btn4">이미지 속성 변경4</button>
+	<button id="btn5">color 속성 변경</button>
+	<button id="btn6">html tag 추가</button>
+	<button id="btn7">html text 추가</button>
+	<button id="btn8">remove, empty</button>
+	<button id="btn9">객체 생성 / 추가</button>
+	<h1>jQuery를 이용해서 문서조작</h1>
+	<div> 
+		<h4>테스트(red)</h4>
+		<h4>테스트(green)</h4>
+		<h4>테스트(blue)</h4>
+		
+		<!-- before -->
+		<div id="m_3" style="border: 1px solid #000; padding: 10px; margin: 10px;">
+			<!-- prepend -->
+			#m_3 : 에고 이 이미지가 아닌데... 짝수번째 이미지를 ch3.png로 변경해주세요"<br>
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<img src="../day8/ch2.png">
+			<!-- append -->
+		</div>
+		<!-- after -->
+		
+	</div>
+</body>
+</html>

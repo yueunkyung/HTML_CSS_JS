@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>jQuery에 대하여</title>
+<!--
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+-->
+<script src="../jslib/jquery-3.7.1.min.js"></script>
+<script>
+	window.onload = function(){
+		console.log("1");
+	};
+	
+	//replace(대체)
+	window.onload = function(){
+		console.log("2");
+	};
+	
+	$(document).ready(function(){
+		console.log("3");
+	});
+	
+	//기능이 add된다
+	$(document).ready(function(){
+		console.log("4");
+	});
+	
+	//기능이 add된다
+	$(function(){
+		console.log("5");
+		var obj = {"background-color":"aquamarine", "border":"1px solid red"};
+		$("h1").css("color", "blue");
+		$("h1").css(obj);
+		
+		$("button:nth-of-type(1)").on("click", f1);
+	});
+	
+	function f1(){
+		$("#here").html("<h1>button 연습</h1>");
+	}
+</script>
+<style>
+</style>
+</head>
+<body>
+	<h1>jQuery에 대하여</h1>
+	<h1>jQuery에 대하여</h1>
+	<button>버튼1</button>
+	<button>버튼2</button>
+	<button>버튼3</button>
+	<button>버튼4</button>
+	<button>버튼5</button>
+	<div id="here">여기</div>
+	<input type="text" />
+	<input type="text" />
+	<input type="password" />
+	<input type="email" />
+	<input type="text" />
+</body>
+</html>

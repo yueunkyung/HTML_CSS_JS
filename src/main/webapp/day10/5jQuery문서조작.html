@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>jQuery를 이용해서 문서조작2</title>
+<script src="../jslib/jquery-3.7.1.min.js"></script>
+<script>
+	$(function(){
+		var target = $("div:nth-child(1)");
+		setInterval(function(){
+			$("img").first().appendTo(target);
+		}, 500);
+	});
+</script>
+</head>
+<body>
+	<div>
+		<img src="../day8/images/img1.jpg" />
+		<img src="../day8/images/img2.jpg" />
+		<img src="../day8/images/img3.jpg" />
+		<img src="../day8/images/img4.jpg" />
+		<img src="../day8/images/img5.jpg" />
+		<img src="../day8/images/img6.jpg" />
+		<img src="../day8/images/img7.jpg" />
+		<img src="../day8/images/img8.jpg" />
+		<img src="../day8/images/img9.jpg" />
+		<img src="../day8/images/img10.jpg" />
+	</div>
+</body>
+</html>

@@ -1,42 +1,59 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<title>속성 선택자</title>
-<style>
-   ul {
-		 list-style:none;
-   }
-	 li {
-		 display:inline-block;
-		 margin:10px;
-	 }
+	<meta charset="utf-8">
+	<title>속성 선택자</title>
+	<style>
+		ul {
+			list-style: none;
+		}
+
+		li {
+			display: inline-block;
+			margin: 10px;
+		}
+
 		li a {
 			padding: 5px 20px;
 			font-size: 14px;
 			color: blue;
 			text-decoration: none;
 		}
+
 		.flat {
-			background:blue;
-			color:white;
+			background: blue;
+			color: white;
 		}
-	[class ~="button"] {
-		/* ~(틸드)는 포함 */
-		border: 2px solid black;
-		box-shadow: rgba(0,0,0,0.4) 5px 5px;
-	}
-</style>
+
+		[class~="button"] {
+			/* ~(틸드)는 포함 */
+			border: 2px solid black;
+			box-shadow: rgba(0, 0, 0, 0.4) 5px 5px;
+			color: goldenrod;
+		}
+	</style>
+	<script src="../../jslib/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function () {
+			$("button:nth-child(1)").click(function () {
+				$('a[class~="button"]').css("border", "5px dotted red");
+			});
+		});
+	</script>
 </head>
 
 <body>
 	<h1 class="button">@@@@@@@@@@@</h1>
-	<button class="button">버튼</button>
+	<div>
+		<button class="button">버튼</button>		
+	</div>
 	<ul>
 		<li><a href="#">메뉴 1</a></li>
 		<li><a href="#">메뉴 2</a></li>
 		<li><a href="#" class="button">메뉴 3</a></li>
-		<li><a href="#" class="flat button" >메뉴 4</a></li>
+		<li><a href="#" class="flat button">메뉴 4</a></li>
 	</ul>
-  </body>
- </html>
+</body>
+
+</html>

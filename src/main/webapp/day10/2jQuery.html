@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery에 대하여</title>
+	<style>
+		.blue { color : blue; }
+		.bgGreen { background-color: #5ecf5e; }
+	</style>
+	<script src="../jslib/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function () {
+			$("button:nth-child(1)").click(function(){
+				var obj = {
+					"font-size":"20px",
+					"border":"2px dotted red"
+				};
+				$("h1").css({"color":"orange"});
+				$("h1").css(obj);
+			});
+			
+			$("button:nth-child(2)").click(f2);
+			$("button:nth-child(3)").click(f3);
+			$("button:nth-child(4)").click(f4);
+			$("button:nth-child(5)").click(f5);
+			$("button:nth-child(6)").click(f6);
+		});
+		
+		function f2() {
+			$("input[type='button']").css({"border":"5px solid green"});
+			$("input:button").css({"color":"red"});
+			$("input:password").css({"color":"blue"});
+		}
+		
+		function f3() {
+			var arr = [
+				{
+					사이트이름 : "네이버",
+					url : "https://www.naver.com/",
+				},{
+					사이트이름 : "구글",
+					url : "https://www.google.com/",
+				},{
+					사이트이름 : "다음",
+					url : "https://www.daum.net/",
+				}
+			];
+			
+			var output = "<ul>";
+				
+			$.each(arr, function(index, item) {
+				output += "<li><a href='"+ item.url +"'>" + item["사이트이름"] + "</a></li>";
+			});
+		
+			$("#here").html(output + "</ul>");
+		}
+		
+		function f4() {
+			var output = "<ul>";
+				
+			$("button").each(function(index, item){
+				output += "<li>" +$(item).html() + "</li>";
+			});
+		
+			$("#here").html(output + "</ul>");
+		}
+		
+		function f5() {
+			$("button").addClass("blue bgGreen");
+			$("#here").addClass("bgGreen");
+		}
+		
+		function f6() {
+			var obj1 = {name:"홍길동"};
+			obj1.age = 20;
+			var obj2 = {주소 : "서울시 마포구", phone: "010-2222-2222"};
+			var output = "<ul>";
+			
+			$.extend(obj1, obj2, {major:"컴공"});
+			
+			//key, value : 속성, 값
+			$.each(obj1, function(key, value){
+				output += "<li>" + key + " ==> " + value + "</li>";
+			});
+			
+			jQuery("#here").html(output + "</ul>");
+		}
+	</script>
+</head>
+
+<body>
+	<h1>jQuery에 대하여</h1>
+	<h1>jQuery에 대하여</h1>
+	<div>
+		<button>h1찾기</button>
+		<button>버튼 타입 찾기</button>
+		<button>배열 사용</button>
+		<button>배열 사용(selector 이용)</button>
+		<button>클래스 추가(addClass)</button>
+		<button>확장(extend)</button>
+	</div>
+	<div id="here">여기</div>
+	<input type="text" />
+	<input type="password" value="123456789" />
+	<input type="button" value="buttontype1" />
+	<input type="button" value="buttontype2" />
+</body>
+
+</html>

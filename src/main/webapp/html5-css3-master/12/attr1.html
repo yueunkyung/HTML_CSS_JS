@@ -23,9 +23,19 @@
 		 background:yellow;
 	 }
 </style>
+<script src="../../jslib/jquery-3.7.1.min.js"></script>
+<script>
+	$(function(){
+		$("button:nth-of-type(1)").click(function(){
+			$("a[href]").css("border","5px dotted red");
+		});
+	});
+</script>
 </head>
 
 <body>
+	<button>스타일 적용1</button>
+	<button>스타일 적용2</button>
 	<ul>
 		<li><a>메인 메뉴 : </a></li>
 		<li><a href="#">메뉴 1</a></li>

@@ -1,42 +1,62 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
-<meta charset="utf-8">
-<title>속성 선택자</title>
-<style>
-   ul {
-		 list-style:none;
-   }
-	 li {
-		 display:inline-block;
-		 margin:10px;
-	 }
+	<meta charset="utf-8">
+	<title>속성 선택자</title>
+	<style>
+		ul {
+			list-style: none;
+		}
+
+		li {
+			display: inline-block;
+			margin: 10px;
+		}
+
 		li a {
 			padding: 5px 20px;
 			font-size: 14px;
 			color: blue;
 			text-decoration: none;
 		}
-	a[title |="us"], a[title ~="us"] {
-		/* |는 공백 안됨 구분자(-) 가능  "us" or "us-english" */
-		/* ~는 공백 구분 "us" or "us english" */
-		background: url(images/us.png) no-repeat left center;
-		padding: 5px 25px;
-	}
-	a[title *="jap"] {
-		/* *는 포함(구분자 무관) */
-		background: url(images/jp.png) no-repeat left center;
-		padding: 5px 25px;
-	}
-</style>
+
+		a[title |="us"], a[title~="us"] {
+			/* |는 공백 안됨 구분자(-) 가능  "us" or "us-english" */
+			/* ~는 공백 구분 "us" or "us english" */
+			background: url(images/us.png) no-repeat left center;
+			padding: 5px 25px;
+		}
+
+		a[title *="jap"] {
+			/* *는 포함(구분자 무관) */
+			background: url(images/jp.png) no-repeat left center;
+			padding: 5px 25px;
+		}
+	</style>
+	<script src="../../jslib/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function () {
+			$("button:nth-child(1)").click(function () {
+				$('a[title |="us"], a[title~="us"]').css("border", "5px dotted red");
+			});
+			$("button:nth-child(2)").click(function () {
+				$('a[title *="jap"]').css("border", "5px dotted green");
+			});
+		});
+	</script>
 </head>
 
 <body>
+	<button>동적으로 css 적용1</button>
+	<button>동적으로 css 적용2</button>
 	<ul>
 		<li>외국어 서비스 : </li>
 		<li><a href="#" title="us">영어</a></li>
+		<li><a href="#" title="us aa">영어</a></li>
 		<li><a href="#" title="us-english">영어</a></li>
 		<li><a href="#" title="japanese">일본어</a></li>
 	</ul>
 </body>
- </html>
+
+</html>

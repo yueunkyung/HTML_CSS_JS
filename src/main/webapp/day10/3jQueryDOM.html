@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery DOM 연습</title>
+	<style>
+		p:nth-child(2n) {
+			border: 1px solid green;
+		}
+	</style>
+	<script src="../jslib/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function () {
+			$("button:nth-child(2)").click(f2);
+			$("button:nth-child(3)").click(f3);
+			$("button:nth-child(4)").click(f4);
+			$("button:nth-child(5)").click(f5);
+			$("button:nth-child(6)").click(f6);
+		});
+		function f2() {
+			// $("p:nth-child(2n)").css("color","red");
+			// $("p").filter(":nth-child(2n)").css("color","red");
+			$("p").filter(function (index) {
+				return index == 1 || index == 2 || index == 4;
+			}).css("color", "red");
+		}
+
+		function f3() {
+			$("p").css("background-color", "orange")
+				.filter(":nth-child(2n)").css("color", "red").end()
+				.filter(":nth-child(2n+1)").css("font-size", "24px");
+		}
+
+		function f4() {
+			$("p").eq(2).css("color", "orange");
+			$("p").eq(3).css("color", "red");
+			$("p").first().css("color", "blue");
+			$("p").last().css("color", "green");
+			$("p").last().css("color", "purple");
+
+		}
+
+		function f5() {
+			var friends = `
+				<friends>
+					<friend>
+						<name>은경</name>
+						<phone>010-5555-5555</phone>
+					</friend>
+					<friend>
+						<name>윤성</name>
+						<phone>010-2222-2222</phone>
+					</friend>
+				</friends>
+			`;
+			var docObj = $.parseXML(friends);
+			$(docObj).find("friend").each(function (index, item) {
+				//console.log(item);
+				console.log($(this).find("name").text());
+				console.log($(item).find("phone").text());
+			});
+		}
+
+		function f6() {
+			//파싱 : String -> Object
+			//JavaScript -> JSON.parse()
+			var jsonData = `
+				{"BTC": {
+							"opening_price": "38527000",
+							"closing_price": "38612000",
+							"min_price": "38481000",
+							"max_price": "38870000",
+							"units_traded": "2192.92214849",
+							"acc_trade_value": "84771165875.3487",
+							"prev_closing_price": "38527000",
+							"units_traded_24H": "3951.09924554",
+							"acc_trade_value_24H": "153035404363.3175",
+							"fluctate_24H": "-152000",
+							"fluctate_rate_24H": "-0.39"
+						}
+				}
+			`;
+
+			var jsonObj = $.parseJSON(jsonData);
+			console.log(jsonObj["BTC"]);
+
+			var output = "<ul>";
+
+			$.each(jsonObj["BTC"], function (key, value) {
+				output += "<li>" + key + " ==> " + value + "</li>";
+			});
+
+			$("#here").html(output + "</ul>");
+		}
+	</script>
+</head>
+
+<body>
+	<h1>jQuery DOM 연습</h1>
+	<button>filter</button>
+	<button>filter().end()</button>
+	<button>위치eq() => (0부터~)</button>
+	<button>XML 파싱</button>
+	<button>JSON 파싱</button>
+	<hr>
+	<p>피자</p>
+	<p>치킨</p>
+	<p>돈까스</p>
+	<p>국밥</p>
+	<p>김밥</p>
+	<div id="here">여기</div>
+	<hr>
+	<div id="here2">
+		<span>비활성화</span>
+		<span>비활성화</span>
+		<span>비활성화</span>
+		<button id="btn1">활성화하기</button>
+	</div>
+	<script>
+		$(function () {
+			$("#btn1").click(function () {
+				$(this).text("비활성화하기");
+				$(this).parent().css("color", "green");
+				$(this).parent().find("span").text("활성화");
+			});
+		});
+	</script>
+</body>
+
+</html>
