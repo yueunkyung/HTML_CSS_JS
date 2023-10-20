@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery effect</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function () {
+			$("button:nth-child(1)").click(function () {
+				$("p").show(500, function() {
+					$("#here").html("show 완료!!!");
+				});
+			});
+			$("button:nth-child(2)").click(function () {
+				$("p").hide(500, function() {
+					$("#here").html("hide 완료!!!");					
+				});
+			});
+			$("button:nth-child(3)").click(function () {
+				$("p").toggle(500, function() {
+					$("#here").html("toggle 완료!!!");					
+				});
+			});
+		});
+	</script>
+</head>
+
+<body>
+
+	<button>show</button>
+	<button>hide</button>
+	<button>Toggle</button>
+	<div id="here">여기</div>
+	<p>This is a paragraph with little content.</p>
+	<p>This is another small paragraph.</p>
+
+</body>
+
+</html>

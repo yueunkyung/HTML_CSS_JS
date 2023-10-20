@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery event</title>
+	<script src="../jslib/jquery-3.7.1.min.js"></script>
+	<script>
+		$(call);
+
+		//JavaScript Object
+		var obj = {name: "홍길동", age: 20, "가장 좋아하는 과일": "사과"};
+
+		//JSON(JavaScript Object Notation) : Object -> 문자열
+		var str = JSON.stringify(obj);
+		console.log(str); //'{"name":"홍길동","age":20,"가장 좋아하는 과일":"사과"}'
+
+		console.log(JSON.parse(str).name);
+		console.log("object 첫번째 key ???", Object.keys(obj)[0]);
+		console.log("object 첫번째 value???", obj[Object.keys(obj)[0]]);
+
+		function call() {
+			$("h1").hover(f1, f2);
+			$("h2").hover(f1, f2);
+			$("#btn1").on("click", f3);
+			$("#btn2").on("click", f4);
+			$("#btn3").on("click", f5);
+			$("a").on("click", f6);
+			$("form").on("submit", f7);
+			$("input[name='userid']").on("keyup", f8);
+			$("input[name='userid']").on("change", f9);
+		}
+
+		function f1() {
+			$(this).css("background", "orange");
+		}
+
+		function f2() {
+			$(this).css("background", "transparent");
+		}
+		function f3() {
+			alert("버튼입니다.");
+		}
+
+		function f4() {
+			$("#btn1").off("click");
+		}
+
+		function f5() {
+			$("#btn1").trigger("click");
+		}
+
+		function f6(event) {
+			alert($(this).attr("href") + "페이지가 이동됩니다.");
+
+			//preventDefault() -> default 이벤트 핸들러 취소 		
+			event.preventDefault();
+			
+			event.stopPropagation(); // 부모에게 전달되는 click 이벤트를 막아줌 - 이벤트 버블링 제어
+		}
+
+		function f7(event) {
+			//var userid = document.querySelector("input[name='userid']").value;
+			var userid = $("input[name='userid']").val();
+			console.log("userid", userid)
+			if (userid != "admin") {
+				// preventDefault()
+				// form에  onsubmit="return false" 작성없이 default 이벤트 핸들러 취소 가능하게 만들어 줌
+				event.preventDefault();
+			}
+		}
+		
+		function f8() {
+			$("#here").html($(this).val());
+		}
+		
+		function f9() {
+			$("#here").html($(this).val()+"!!!!!!!!!");			
+		}
+	</script>
+</head>
+
+<body>
+	<h1>jQuery event.....</h1>
+	<h2>jQuery event.....</h2>
+	<button id="btn1">이벤트연결</button>
+	<button id="btn2">이벤트해제</button>
+	<button id="btn3">event trigger(이벤트 강제 호출)</button>
+	<div onclick="alert('a밖에 div')">
+		<a href="1event.html">page이동</a>
+	</div>
+	<form action="../day9/login.jsp" method="get">
+		<input type="text" name="userid" value="firstzone" />
+		<input type="text" name="userpass" value="1234" />
+		<input type="submit" value="서버전송">
+	</form>
+	<div id="here"></div>
+</body>
+
+</html>

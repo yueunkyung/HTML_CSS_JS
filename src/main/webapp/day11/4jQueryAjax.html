@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery Ajax(비동기 통신 : Asynchronize JavaScript And XML)</title>
+	<!--<script src="../jslib/jquery-3.7.1.min.js"></script>-->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+	<script>
+
+		$(call);
+
+		function call() {
+			$("#btn1").on("click", f1);
+			$("#btn2").on("click", f2);
+			$("#btn3").on("click", f3);
+			$("#btn4").on("click", f4);
+			$("#btn5").on("click", f5);
+			$("#btn6").on("click", f6);
+			$("form").on("submit", f7);
+			$("form input[type='button']").on("click", f7);
+			$("#btn7").on("click", f8);
+		}
+
+		function f8(e) {
+			var param = $("form").serializeArray();
+			var obj= {};
+			console.log(param);
+			
+			$.each(param, function(key, item) {
+				obj[item.name] = item.value;
+			});
+			
+			console.log("?????", obj);
+			
+			$.ajax({
+				url:"empinput.jsp?",
+				data: obj,
+				type: "post",
+				success: function(resData) {
+					$("#here").html(resData);
+				}
+			});
+			
+			e.preventDefault();
+		}
+		
+		function f7(e) {
+			//alert("f7");
+			var param = $("form").serialize();
+			
+			// alert(param);			
+			console.log(param);
+			$.ajax({
+				url:"empinput.jsp?"+param,
+				type: "get",
+				success: function(resData) {
+					$("#here").html(resData);
+				}
+			});
+			
+			e.preventDefault();
+		}
+
+		function f6() {
+			$.getScript("external.js", function(response){
+				console.log(response);
+				first();
+			});
+		}
+		
+		function f5() { //jQuery ajax
+			var url = "../day9/empInfo.jsp";
+			var empinfo = {empid: $("#empid").val(), age: 20};
+
+			$.ajax({
+				type: "get",
+				url: url,
+				data: empinfo,
+				success: function (responseData) {
+					var obj = JSON.parse(responseData);
+					$("#here").html(obj.first_name);
+					//$("#here").css("background-color","pink");
+				},
+				error: function(xhr, status, error){
+					console.log(error);
+				}
+			});
+		}
+
+		function f4() { //jQuery ajax - post
+			var url = "../day9/empInfo.jsp";
+			var data = {empid: $("#empid").val(), age: 20};
+			$.post(url, data, function (responseData) {
+				var obj = JSON.parse(responseData);
+				$("#here").html(obj.first_name);
+			});
+		}
+
+		function f3() { //jQuery ajax - get
+			var url = "../day9/empInfo.jsp?empid=" + $("#empid").val();
+			$.get(url, function (responseData) {
+				var obj = JSON.parse(responseData);
+				$("#here").html(obj.first_name);
+			});
+		}
+		function f2() {
+			var url = "../day9/empInfo.jsp?empid=" + $("#empid").val();
+			$("#here").load(url); //현재문서에 넣는 것
+		}
+
+		function f1() { //JavaScript ajax
+
+			/*
+				async : true = 비동기 (Asynchronous, 요청을 보낸 후 응답결과와는 상관없이 다음방식이 동작하는 방식)
+				async : false = 동기 (Synchronous, 요청을 보낸 후 응답결과를 받아야지만 다음 동작이 이루어지는 방식)
+			*/
+
+			var xhr = new XMLHttpRequest();
+			var url = "../day9/empInfo.jsp?empid=" + $("#empid").val();
+			xhr.open("get", url, true); // true 비동기
+			xhr.onreadystatechange = function () {
+				if (xhr.readyState == 4 && xhr.status == 200) {
+					var obj = JSON.parse(xhr.responseText);
+					$("#here").html(obj["first_name"]);
+				}
+			};
+			xhr.send();
+		}
+	</script>
+</head>
+
+<body>
+	<h1>jQuery Ajax(비동기 통신 : Asynchronize JavaScript And XML)</h1>
+	<input type="text" id="empid" value="100" />
+	<button id="btn1">JavaScript</button>
+	<button id="btn2">jQuery 라이브러리(load)</button>
+	<button id="btn3">jQuery 라이브러리(get)</button>
+	<button id="btn4">jQuery 라이브러리(post)</button>
+	<button id="btn5">jQuery 라이브러리(ajax)</button>
+	<button id="btn6">jQuery 라이브러리(javascript)</button>
+	<button id="btn7">serializeArray</button>
+	<hr>
+	<div id="here">여기</div>
+	
+	<form action="../day9/login.jsp" method="get">
+		<input type="text" name="userid1" value="a1" /><br>
+		<input type="text" name="userid2" value="a2" /><br>
+		<input type="text" name="userid3" value="a3" /><br>
+		<input type="text" name="userid4" value="a4" /><br>
+		<input type="text" name="userid5" value="a5" /><br>
+		<input type="text" name="userpass" value="1234" /><br>
+		<input type="submit" value="서버전송1">
+		<input type="button" value="서버전송2">
+	</form>
+</body>
+
+</html>

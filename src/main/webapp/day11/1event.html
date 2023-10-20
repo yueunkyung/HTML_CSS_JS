@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery event에 대하여</title>
+	<link href="external.css" rel="stylesheet" alt="text/css" />
+	<style>
+		.reverse {
+			color: red;
+			border: 2px dotted blue;
+		}
+	</style>
+	<script src="external.js"></script>
+	<script src="../jslib/jquery-3.7.1.min.js"></script>
+	<script>
+		$(function () {
+			$("#btn1").on("click", f1);
+			$("#btn2").click(f1);
+			$("h1").on("click", f2);
+
+
+			var obj = {
+				"mouseenter": function () {
+					$(this).addClass("reverse");
+				},
+				"mouseleave": function () {
+					$(this).removeClass("reverse");
+				}
+			};
+
+			$("h1").on(obj);
+
+			$("button").on(obj);
+
+			//hover() => mouseenter + mouseleave
+			$("#here").hover(function () {
+				$(this).addClass("reverse");
+			}, function () {
+				$(this).removeClass("reverse");
+			});
+
+		});
+
+		function f2(item) {
+			//console.dir(item);
+			$(this).html(f3);
+		}
+
+		function f3(index, content) {
+			//var original = content;
+			//var original = $(this).text();
+			var original = $(this).html();
+			console.log(original);
+			return original + "!";
+		}		
+	</script>
+</head>
+
+<body>
+	<h1><span>jQuery1 </span>event에 대하여1</h1>
+	<h1><span>jQuery2 </span>event에 대하여2</h1>
+	<button id="btn1">이벤트 연결1</button>
+	<button id="btn2">이벤트 연결2</button>
+	<div id="here">
+		<h2>여기</h2>
+	</div>
+</body>
+
+</html>
