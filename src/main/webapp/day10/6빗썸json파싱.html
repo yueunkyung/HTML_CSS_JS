@@ -45,8 +45,11 @@
 		// JSON 파싱하기
 		
 		var output = "<table><thead><tr><th>종목이름</th>";		
-			
-		$.each(response.data.BTC, function(key, value) {			
+		
+		console.log("response.data", response.data);
+		console.log(response.data.BTC);
+		console.log(response.data[Object.keys(response.data)[0]]);
+		$.each(response.data[Object.keys(response.data)[0]], function(key, value) {			
 			output += `<th>${key}</th>`;
 		});
 		
