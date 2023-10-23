@@ -6,6 +6,21 @@
 	<title>jQuery effect</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script>
+			var a = 10;
+			let b =20;
+			const c= 30;
+			alert(call()+a+b+c+d);
+				console.log("dddddd",d );
+			function call(){
+				var a=100;
+				let b =200;
+				const c =300;
+				d=1000;
+				console.log("d",d );
+				return a+b+c;
+			}
+			console.log( 600+10+20+30+1000);
+			
 		$(document).ready(function () {
 			$("button:nth-child(1)").click(function () {
 				$("p").show(500, function() {
@@ -22,6 +37,7 @@
 					$("#here").html("toggle 완료!!!");					
 				});
 			});
+			
 		});
 	</script>
 </head>
